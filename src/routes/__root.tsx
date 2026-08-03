@@ -98,6 +98,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "theme-color", content: "#0f1115" },
+      { name: "msvalidate.01", content: "8603B5AEE860A3E9A624B9A128FDD7C7" },
     ],
     links: [
       // Fonts are self-hosted (see styles.css) and preloaded here so they
@@ -122,6 +123,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "apple-touch-icon", href: "/favicon-512.png" },
     ],
     scripts: [
+      // Microsoft Advertising UET (Universal Event Tracking) — lets
+      // Microsoft Advertising see site visits and attribute conversions
+      // (calls, form submissions, etc.) back to Bing/Microsoft Ads clicks.
+      {
+        children: `(function(w,d,t,r,u){
+  var f,n,i;
+  w[u]=w[u]||[],f=function(){
+    var o={ti:"343195501", enableAutoSpaAdTracking:true};
+    o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")
+  },
+  n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){
+    var s=this.readyState;
+    s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)
+  },
+  i=d.getElementsByTagName(t)[0],
+  i.parentNode.insertBefore(n,i)
+})(window,document,"script","https://bat.bing.com/bat.js","uetq");`,
+      },
       // GoHighLevel (LeadConnector) chat widget — replaces the site's old
       // custom ChatWidget. Chat conversations captured here go straight to
       // the CRM directly through GHL, not through Supabase, so they won't
