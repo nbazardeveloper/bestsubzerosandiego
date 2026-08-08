@@ -26,6 +26,7 @@ import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as FaqRouteImport } from './routes/faq'
+import { Route as CopyOfPrivacyPolicyRouteImport } from './routes/copy-of-privacy-policy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AuthRouteImport } from './routes/auth'
@@ -131,6 +132,11 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CopyOfPrivacyPolicyRoute = CopyOfPrivacyPolicyRouteImport.update({
+  id: '/copy-of-privacy-policy',
+  path: '/copy-of-privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -227,6 +233,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/copy-of-privacy-policy': typeof CopyOfPrivacyPolicyRoute
   '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRoute
@@ -262,6 +269,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/copy-of-privacy-policy': typeof CopyOfPrivacyPolicyRoute
   '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRoute
@@ -298,6 +306,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
+  '/copy-of-privacy-policy': typeof CopyOfPrivacyPolicyRoute
   '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRoute
@@ -335,6 +344,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/blog'
     | '/contact'
+    | '/copy-of-privacy-policy'
     | '/faq'
     | '/privacy-policy'
     | '/projects'
@@ -370,6 +380,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/blog'
     | '/contact'
+    | '/copy-of-privacy-policy'
     | '/faq'
     | '/privacy-policy'
     | '/projects'
@@ -405,6 +416,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/blog'
     | '/contact'
+    | '/copy-of-privacy-policy'
     | '/faq'
     | '/privacy-policy'
     | '/projects'
@@ -442,6 +454,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
+  CopyOfPrivacyPolicyRoute: typeof CopyOfPrivacyPolicyRoute
   FaqRoute: typeof FaqRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProjectsRoute: typeof ProjectsRoute
@@ -584,6 +597,13 @@ declare module '@tanstack/react-router' {
       path: '/faq'
       fullPath: '/faq'
       preLoaderRoute: typeof FaqRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/copy-of-privacy-policy': {
+      id: '/copy-of-privacy-policy'
+      path: '/copy-of-privacy-policy'
+      fullPath: '/copy-of-privacy-policy'
+      preLoaderRoute: typeof CopyOfPrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -746,6 +766,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
+  CopyOfPrivacyPolicyRoute: CopyOfPrivacyPolicyRoute,
   FaqRoute: FaqRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProjectsRoute: ProjectsRoute,
