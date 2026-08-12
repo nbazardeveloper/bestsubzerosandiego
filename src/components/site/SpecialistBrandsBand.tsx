@@ -28,8 +28,8 @@ export function SpecialistBrandsBand({ className }: { className?: string }) {
           ))}
         </div>
         <p className="mx-auto mt-5 max-w-lg text-center text-sm text-primary-foreground/70">
-          We also service other premium brands — Thermador, Bosch, Dacor, GE Monogram and
-          Bertazzoni.
+          We also service other premium brands — Thermador, Bosch, Dacor, GE Monogram, Bertazzoni
+          and Blue Star.
         </p>
       </div>
     </section>

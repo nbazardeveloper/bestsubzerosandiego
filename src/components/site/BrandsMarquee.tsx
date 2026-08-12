@@ -6,6 +6,7 @@
 // visitor scrolls all the way down.
 const BRANDS = [
   "Bertazzoni",
+  "Blue Star",
   "Bosch",
   "Dacor",
   "GE Monogram",

@@ -60,7 +60,8 @@ function ServicesPage() {
           <p className="mt-4 max-w-2xl text-muted-foreground">
             We repair premium residential kitchen appliances and specialize in Sub-Zero, Viking and
             Wolf — across ranges, stoves, cooktops, ovens and refrigeration. We also service other
-            high-end brands including Thermador, Bosch, Dacor, GE Monogram and Bertazzoni.
+            high-end brands including Thermador, Bosch, Dacor, GE Monogram, Bertazzoni and Blue
+            Star.
           </p>
           <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
             We do not service LG, Samsung or Liebherr refrigerators, and we do not repair
