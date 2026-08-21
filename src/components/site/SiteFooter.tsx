@@ -251,6 +251,17 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 py-5 md:px-8">
+          <a href="https://patch.com/new-york/new-york-city/business/listing/574012/best-sub-zero-viking-service?utm_source=badge&utm_medium=referral&utm_campaign=business_badge">
+            <img
+              src="https://patch.com/api_v1/bizpost/574012/badge"
+              alt="Best Sub-Zero & Viking Service on Patch"
+            />
+          </a>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-5 text-xs text-primary-foreground/60 md:px-8">
           <span>
             © {year} Best Sub-Zero &amp; Viking Service. All rights reserved. Independent appliance
