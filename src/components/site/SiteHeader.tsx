@@ -46,14 +46,11 @@ export function SiteHeader() {
         </Link>
 
         {/* Mobile logo — no CTA bar on mobile, so a normal small logo is fine.
-            Business name text is hidden here (logo-only); the accessible
-            name moves to the link's aria-label since there's no visible
-            text for it to come from anymore. */}
-        <Link
-          to="/"
-          aria-label="Best Sub-Zero & Viking Service — home"
-          className="flex items-center gap-3 md:hidden"
-        >
+            Name is split onto two short lines at a small size specifically
+            so it doesn't push the call/menu buttons on the right out of
+            view on narrow screens. No aria-label needed: this visible text
+            already gives the link its accessible name. */}
+        <Link to="/" className="flex min-w-0 items-center gap-2 md:hidden">
           <img
             src="/images/logo.webp"
             alt=""
@@ -61,6 +58,10 @@ export function SiteHeader() {
             height={420}
             className="h-12 w-auto flex-shrink-0"
           />
+          <span className="flex flex-col leading-tight text-xs font-semibold tracking-tight">
+            <span>Best Sub-Zero &amp;</span>
+            <span>Viking Service</span>
+          </span>
         </Link>
 
         {/* Business name/tagline — pushed right to clear the big logo. Hidden
