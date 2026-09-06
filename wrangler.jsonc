@@ -1,14 +1,15 @@
-// Cloudflare Worker deployment config. The site has no database or admin
+// Cloudflare Pages deployment config. The site has no database or admin
 // backend, so there are no environment variables or secrets to declare here
-// anymore — this Worker only does SSR rendering of static content.
+// — the site builds to dist/ (static assets + a dist/_worker.js doing SSR,
+// see vite.config.ts's "cloudflare-pages" nitro preset).
 //
-// Deploy with: npm run build && npx wrangler deploy
+// Cloudflare Pages dashboard "Configure builds" fields (Git integration):
+//   Framework preset:       None
+//   Build command:           npm run build
+//   Build output directory:  dist
 //
-// To serve this through Cloudflare Pages instead of a standalone Worker, add
-// a Pages project in "Advanced Mode" pointed at this build output (it
-// includes the Worker script Pages expects for that mode) — see the note in
-// vite.config.ts for why a fully static Pages export isn't used yet.
+// CLI deploy instead: npm run build && npx wrangler pages deploy dist
 {
   "name": "best-sub-zero-viking-san-diego",
-  "compatibility_date": "2026-08-31"
+  "pages_build_output_dir": "dist"
 }

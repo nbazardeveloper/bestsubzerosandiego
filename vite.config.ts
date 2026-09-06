@@ -46,22 +46,27 @@ export default defineConfig(({ command }) => ({
     }),
     // Deploy adapter — only needed when producing a build, not during `vite dev`.
     //
-    // NOTE: a fully static prerendered export (Nitro's "cloudflare-pages-static"
-    // preset) was attempted here first, since the site has no database/admin
-    // left and a pure static export is the ideal end state. It currently fails
-    // in this exact TanStack Start + Nitro (3.0.260603-beta) + Vite 8 beta
-    // combination with "rolldownOptions.input should not be an html file when
-    // building for SSR" during Nitro's own build step, independent of how the
-    // prerender routes are configured (tried both Nitro's `prerender` option
-    // and TanStack Start's own `prerender`/`autoStaticPathsDiscovery`) — this
-    // looks like a genuine upstream incompatibility in the beta toolchain, not
-    // a config mistake. Falling back to "cloudflare-module": this still ships
-    // with zero database/admin/secrets (the actual goal), just as a small
-    // Cloudflare Worker doing SSR instead of pure static files. Deploy it to
-    // Cloudflare Pages via Pages' "Advanced Mode" (a project pointed at this
-    // build output, which includes a _worker.js). Revisit the static preset
-    // once TanStack Start/Nitro update past this beta.
-    ...(command === "build" ? [nitro({ preset: "cloudflare-module" })] : []),
+    // "cloudflare-pages" outputs a Cloudflare Pages "Advanced Mode" build:
+    // static assets at the root of dist/ plus a dist/_worker.js doing SSR —
+    // exactly what Cloudflare Pages' dashboard Git-integration build expects
+    // (Build command: `npm run build`, Build output directory: `dist`).
+    //
+    // NOTE: a fully static *prerendered* export (Nitro's "cloudflare-pages-static"
+    // preset, which extends Nitro's generic "static" preset) was tried first,
+    // since the site has no database/admin left and a pure static export with
+    // zero server code is the ideal end state. It fails in this exact
+    // TanStack Start + Nitro (3.0.260603-beta) + Vite 8 beta combination with
+    // "rolldownOptions.input should not be an html file when building for SSR"
+    // during Nitro's own build step, independent of how the prerender routes
+    // are configured (tried both Nitro's `prerender` option and TanStack
+    // Start's own `prerender`/`autoStaticPathsDiscovery`) — a genuine upstream
+    // incompatibility in the beta toolchain's static/prerender path, not a
+    // config mistake. "cloudflare-pages" (this one) doesn't go through that
+    // prerender path at all — it's an SSR preset like "cloudflare-module",
+    // just packaged into Pages' _worker.js convention instead of a standalone
+    // Worker — so it doesn't hit the same bug. Revisit the static preset once
+    // TanStack Start/Nitro update past this beta.
+    ...(command === "build" ? [nitro({ preset: "cloudflare-pages" })] : []),
     viteReact(),
   ],
 }));
