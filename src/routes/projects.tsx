@@ -1,25 +1,22 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
-import { MapPin, Images } from "lucide-react";
+import { Images } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { listProjects } from "@/lib/site.functions";
 import { FinalCta } from "@/components/site/FinalCta";
 
-const COMPLETED_JOBS_MAP_URL =
-  "https://www.google.com/maps/d/u/0/viewer?mid=1KRsUeTkfj5YfyxZIZ93085Ynm4D4Cz0&ll=40.63165163668629%2C-74.13427010000002&z=10";
-
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Recent Repair Projects | Sub-Zero, Viking & Wolf | NY & NJ" },
+      { title: "Recent Repair Projects | Sub-Zero, Viking & Wolf | San Diego" },
       {
         name: "description",
         content:
-          "A sample of premium appliance repair projects completed for customers across Staten Island, Brooklyn, Long Island near Queens and New Jersey.",
+          "A sample of premium Sub-Zero, Viking and Wolf appliance repair projects completed for customers across San Diego, La Jolla, Coronado and Chula Vista.",
       },
       { property: "og:title", content: "Recent Repair Projects" },
       {
@@ -28,6 +25,10 @@ export const Route = createFileRoute("/projects")({
       },
       { property: "og:url", content: absUrl("/projects") },
       { property: "og:image", content: DEFAULT_OG_IMAGE },
+      ...twitterMeta(
+        "Recent Repair Projects",
+        "Sub-Zero, Viking, Wolf and Thermador projects we've completed.",
+      ),
     ],
     links: [{ rel: "canonical", href: absUrl("/projects") }],
   }),
@@ -60,14 +61,6 @@ function ProjectsPage() {
             a transparent estimate.
           </p>
           <div className="mt-5 flex flex-wrap items-center gap-4">
-            <a
-              href={COMPLETED_JOBS_MAP_URL}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="inline-flex items-center gap-2 text-sm text-accent hover:underline"
-            >
-              <MapPin className="h-4 w-4" aria-hidden /> View our completed jobs map
-            </a>
             <Link
               to="/projects/gallery"
               title="Photo gallery"

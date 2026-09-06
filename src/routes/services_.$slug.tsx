@@ -5,18 +5,26 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { getServiceBySlug, listServices, getSiteSettings } from "@/lib/site.functions";
-import { buildTitle, buildMetaDescription, absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import {
+  buildTitle,
+  buildMetaDescription,
+  absUrl,
+  DEFAULT_OG_IMAGE,
+  ORG_ID,
+  LOCAL_BUSINESS_ADDRESS,
+  twitterMeta,
+} from "@/lib/seo";
 import { FinalCta } from "@/components/site/FinalCta";
 
 const AREAS = [
-  "Staten Island",
-  "Brooklyn",
-  "Queens",
-  "Long Island (near Queens)",
-  "Great Neck",
-  "Jersey City",
-  "Elizabeth, NJ",
-  "North & Central NJ",
+  "San Diego",
+  "La Jolla",
+  "Pacific Beach",
+  "Coronado",
+  "Del Mar",
+  "Chula Vista",
+  "National City",
+  "North County San Diego",
 ];
 
 // Trailing-underscore filename ("services_.$slug") opts this route OUT of
@@ -46,6 +54,7 @@ export const Route = createFileRoute("/services_/$slug")({
     const s = loaderData.service;
     const title = buildTitle(s.title);
     const description = buildMetaDescription(s.short_description, s.description);
+    const ogImage = s.image_url ?? DEFAULT_OG_IMAGE;
     return {
       meta: [
         { title },
@@ -54,7 +63,8 @@ export const Route = createFileRoute("/services_/$slug")({
         { property: "og:description", content: description },
         { property: "og:url", content: absUrl(`/services/${s.slug}`) },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: s.image_url ?? DEFAULT_OG_IMAGE },
+        { property: "og:image", content: ogImage },
+        ...twitterMeta(s.title, description, ogImage),
       ],
       links: [{ rel: "canonical", href: absUrl(`/services/${s.slug}`) }],
       scripts: [
@@ -68,8 +78,10 @@ export const Route = createFileRoute("/services_/$slug")({
             description: s.description,
             provider: {
               "@type": "LocalBusiness",
+              "@id": ORG_ID,
               name: "Best Sub-Zero & Viking Service",
-              telephone: "+1-888-702-8565",
+              telephone: "+1-619-975-4755",
+              address: LOCAL_BUSINESS_ADDRESS,
             },
             areaServed: AREAS,
             brand: s.brands.map((b) => ({ "@type": "Brand", name: b })),
@@ -114,7 +126,7 @@ function ServiceDetail() {
   const related = all
     .filter((s) => s.slug !== service.slug && s.category === service.category)
     .slice(0, 3);
-  const phone = settings?.phone ?? "+1 (888) 702-8565";
+  const phone = settings?.phone ?? "+1 (619) 975-4755";
   const telHref = `tel:${phone.replace(/[^+\d]/g, "")}`;
 
   // Every service title ends in its category keyword ("... Repair" /

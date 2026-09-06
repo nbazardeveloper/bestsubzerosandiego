@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
 import { CheckCircle2 } from "lucide-react";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { FinalCta } from "@/components/site/FinalCta";
@@ -37,19 +37,23 @@ const VALUES = [
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About Us | 13 Years of Premium Appliance Repair in NY & NJ" },
+      { title: "About Us | Premium Appliance Repair in San Diego" },
       {
         name: "description",
         content:
-          "Founded to give homeowners honest, professional, long-lasting repair for premium kitchen appliances. 13 years of accurate diagnostics and transparent pricing.",
+          "Founded to give homeowners honest, professional, long-lasting repair for premium kitchen appliances. Accurate diagnostics and transparent pricing.",
       },
       { property: "og:title", content: "About Best Sub-Zero & Viking Service" },
       {
         property: "og:description",
-        content: "13 years of premium appliance repair across NY & NJ.",
+        content: "Premium appliance repair across San Diego.",
       },
       { property: "og:url", content: absUrl("/about") },
       { property: "og:image", content: DEFAULT_OG_IMAGE },
+      ...twitterMeta(
+        "About Best Sub-Zero & Viking Service",
+        "Premium appliance repair across San Diego.",
+      ),
     ],
     links: [{ rel: "canonical", href: absUrl("/about") }],
   }),
@@ -71,8 +75,8 @@ function About() {
               servicing other high-end residential brands.
             </p>
             <p className="mt-4 max-w-xl text-muted-foreground">
-              13 years of accurate diagnostics, transparent communication and quality workmanship —
-              helping customers avoid unnecessary replacements.
+              Accurate diagnostics, transparent communication and quality workmanship — helping
+              customers avoid unnecessary replacements.
             </p>
             <p className="mt-4 max-w-xl text-sm text-muted-foreground">
               We are an independent service company — not the manufacturer, an authorized dealer, or

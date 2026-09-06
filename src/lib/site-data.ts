@@ -1,42 +1,32 @@
 // ============================================================================
-// DATABASE STUB (temporary)
+// STATIC SITE DATA
 // ============================================================================
-// The live Supabase DB is disconnected/broken right now, so this file lets
-// the app run entirely on in-memory mock data instead of hitting Supabase.
-//
-// TO RECONNECT THE REAL DATABASE LATER:
-//   1. Set DB_STUBBED to false below.
-//   2. (Optional) Delete this file and remove its imports from
-//      src/lib/site.functions.ts and src/lib/admin.functions.ts.
-// That's it — nothing else in the app needs to change.
+// This is the single source of truth for content that used to live in
+// Supabase (site settings, services, projects) — the site has no database or
+// admin panel, so this file IS the CMS. Edit it directly and redeploy to
+// change content.
 // ============================================================================
-
-export const DB_STUBBED = false;
 
 import type { SiteSettings } from "./site.functions";
 import { BLOG_POSTS } from "./blog-data";
 
-export const mockSiteSettings: SiteSettings = {
+// TODO: social_links is still empty — add the real San Diego Google
+// Reviews/Yelp/Instagram/Facebook/YouTube URLs once you have them.
+export const siteSettings: SiteSettings = {
   business_name: "Best Sub-Zero & Viking Service",
-  phone: "+1 (888) 702-8565",
-  email: "info@bestsubzerovikingservices.com",
+  phone: "+1 (619) 975-4755",
+  email: "subzerovikingrepair.pro@gmail.com",
   address: null,
   hours: "Mon–Sat: 8:00 AM – 7:00 PM",
-  diagnostic_fee: "$95, waived when the repair is completed ($125 in Manhattan, also waived)",
-  social_links: {
-    instagram: "https://instagram.com/best_subzero_viking_service",
-    facebook: "https://www.facebook.com/BSZVS",
-    youtube: "https://www.youtube.com/@bestsubzerovikingservice",
-    google_reviews: "https://share.google/JpOFNRbqklRGN26Ui",
-    yelp: "https://www.yelp.com/biz/best-sub-zero-and-viking-service-staten-island-14",
-  },
+  diagnostic_fee: "$95, waived when the repair is completed",
+  social_links: {},
   review_count: null,
   review_rating: 5.0,
   yelp_review_count: null,
   yelp_review_rating: 4.9,
 };
 
-type MockService = {
+type Service = {
   id: string;
   slug: string;
   title: string;
@@ -53,7 +43,7 @@ type MockService = {
 
 const now = new Date().toISOString();
 
-export const mockServices: MockService[] = [
+export const services: Service[] = [
   {
     id: "svc-1",
     slug: "refrigerator-freezer-repair",
@@ -241,7 +231,7 @@ export const mockServices: MockService[] = [
   },
 ];
 
-type MockProject = {
+type Project = {
   id: string;
   slug: string;
   title: string;
@@ -254,62 +244,131 @@ type MockProject = {
   created_at: string;
 };
 
-export const mockProjects: MockProject[] = [
+export const projects: Project[] = [
   {
     id: "prj-1",
-    slug: "subzero-648pro-restoration-si",
-    title: "Sub-Zero 648PRO Full Restoration",
+    slug: "subzero-built-in-refrigerator-repair-la-jolla",
+    title: "Sub-Zero Built-In Refrigerator & Freezer Repair",
     description:
-      "Complete diagnostics and compressor replacement on a Sub-Zero 648PRO built-in refrigerator/freezer. Restored proper cooling on both sides and re-sealed all gaskets.",
+      "Diagnostics and repair on a Sub-Zero built-in column refrigerator and freezer in a La Jolla kitchen — restored proper cooling and food storage on both sides.",
     brands: ["Sub-Zero"],
-    service_area: "Staten Island",
-    image_urls: [],
+    service_area: "La Jolla",
+    image_urls: [
+      "/images/projects/subzero-built-in-refrigerator-repair-la-jolla-1.webp",
+      "/images/projects/subzero-built-in-refrigerator-repair-la-jolla-2.webp",
+      "/images/projects/subzero-built-in-refrigerator-repair-la-jolla-3.webp",
+    ],
     completed_on: null,
     is_published: true,
     created_at: now,
   },
   {
     id: "prj-2",
-    slug: "viking-vgic-range-rebuild-bk",
-    title: "Viking VGIC Range Ignition Rebuild",
+    slug: "subzero-side-by-side-refrigerator-repair-coronado",
+    title: "Sub-Zero Side-by-Side Refrigerator Repair",
     description:
-      "Rebuilt spark ignition system and replaced safety valves on a Viking Professional gas range. Verified flame stability across all burners.",
-    brands: ["Viking"],
-    service_area: "Brooklyn",
-    image_urls: [],
+      "Full-service repair on a built-in Sub-Zero side-by-side refrigerator in Coronado, keeping both the fridge and freezer sides fully stocked and running.",
+    brands: ["Sub-Zero"],
+    service_area: "Coronado",
+    image_urls: [
+      "/images/projects/subzero-side-by-side-refrigerator-repair-coronado-1.webp",
+      "/images/projects/subzero-side-by-side-refrigerator-repair-coronado-2.webp",
+      "/images/projects/subzero-side-by-side-refrigerator-repair-coronado-3.webp",
+    ],
     completed_on: null,
     is_published: true,
     created_at: now,
   },
   {
     id: "prj-3",
-    slug: "wolf-doubleoven-control-li",
-    title: "Wolf Double Oven Control Board Replacement",
+    slug: "viking-wine-cooler-repair-del-mar",
+    title: "Viking Wine Cooler Repair",
     description:
-      "Diagnosed erratic temperature behavior on a Wolf built-in double oven, replaced control board and recalibrated both cavities.",
-    brands: ["Wolf"],
-    service_area: "Long Island",
-    image_urls: [],
+      "Refrigerant system diagnostics and repair on a built-in Viking wine cooler column in Del Mar, restoring proper temperature control for a wine collection.",
+    brands: ["Viking"],
+    service_area: "Del Mar",
+    image_urls: [
+      "/images/projects/viking-wine-cooler-repair-del-mar-1.webp",
+      "/images/projects/viking-wine-cooler-repair-del-mar-2.webp",
+      "/images/projects/viking-wine-cooler-repair-del-mar-3.webp",
+    ],
     completed_on: null,
     is_published: true,
     created_at: now,
   },
   {
     id: "prj-4",
-    slug: "thermador-cooktop-induction-nj",
-    title: "Thermador Induction Cooktop Repair",
+    slug: "viking-range-refrigerator-repair-chula-vista",
+    title: "Viking Range & Refrigerator Repair",
     description:
-      "Replaced two failed induction coils and control interface on a Thermador Freedom induction cooktop. Full function restored.",
-    brands: ["Thermador"],
-    service_area: "Jersey City",
-    image_urls: [],
+      "Combined service call in Chula Vista: range and oven repair alongside a refrigerator/freezer check, completed in a single visit.",
+    brands: ["Viking"],
+    service_area: "Chula Vista",
+    image_urls: [
+      "/images/projects/viking-range-refrigerator-repair-chula-vista-1.webp",
+      "/images/projects/viking-range-refrigerator-repair-chula-vista-2.webp",
+      "/images/projects/viking-range-refrigerator-repair-chula-vista-3.webp",
+      "/images/projects/viking-range-refrigerator-repair-chula-vista-4.webp",
+      "/images/projects/viking-range-refrigerator-repair-chula-vista-5.webp",
+      "/images/projects/viking-range-refrigerator-repair-chula-vista-6.webp",
+    ],
+    completed_on: null,
+    is_published: true,
+    created_at: now,
+  },
+  {
+    id: "prj-5",
+    slug: "refrigerator-repair-national-city",
+    title: "Built-In Refrigerator Repair",
+    description:
+      "Refrigerator repair for a National City family kitchen — back up and running for daily use.",
+    brands: ["Sub-Zero"],
+    service_area: "National City",
+    image_urls: [
+      "/images/projects/refrigerator-repair-national-city-1.webp",
+      "/images/projects/refrigerator-repair-national-city-2.webp",
+    ],
+    completed_on: null,
+    is_published: true,
+    created_at: now,
+  },
+  {
+    id: "prj-6",
+    slug: "outdoor-kitchen-bbq-grill-repair-carlsbad",
+    title: "Outdoor Kitchen BBQ Grill Repair",
+    description:
+      "Burner, ignition and grate service on a built-in outdoor kitchen grill in Carlsbad, restoring even heat across the cooking surface.",
+    brands: ["Viking"],
+    service_area: "North County San Diego",
+    image_urls: [
+      "/images/projects/outdoor-kitchen-bbq-grill-repair-carlsbad-1.webp",
+      "/images/projects/outdoor-kitchen-bbq-grill-repair-carlsbad-2.webp",
+      "/images/projects/outdoor-kitchen-bbq-grill-repair-carlsbad-3.webp",
+    ],
+    completed_on: null,
+    is_published: true,
+    created_at: now,
+  },
+  {
+    id: "prj-7",
+    slug: "viking-range-repair-san-diego",
+    title: "Viking Range Repair",
+    description:
+      "Freestanding Viking range repair in a San Diego kitchen — diagnosed and resolved a heating fault and restored full function.",
+    brands: ["Viking"],
+    service_area: "San Diego",
+    image_urls: [
+      "/images/projects/viking-range-repair-san-diego-1.webp",
+      "/images/projects/viking-range-repair-san-diego-2.webp",
+      "/images/projects/viking-range-repair-san-diego-3.webp",
+    ],
     completed_on: null,
     is_published: true,
     created_at: now,
   },
 ];
 
-export type MockBlogPost = {
+export type BlogPostRow = {
   id: string;
   slug: string;
   title: string;
@@ -322,10 +381,10 @@ export type MockBlogPost = {
   created_at: string;
 };
 
-// Mirrors the blog_posts table shape. Content itself still lives in
-// blog-data.ts (single source of truth) — this just adapts it to the DB
-// row shape so the stub and the real Supabase table return identical data.
-export const mockBlogPosts: MockBlogPost[] = BLOG_POSTS.map((p) => ({
+// Mirrors the old blog_posts table shape. Content itself still lives in
+// blog-data.ts (single source of truth) — this just adapts it to the row
+// shape the rest of the app (post.$slug.tsx, blog.tsx, sitemap.xml) expects.
+export const blogPosts: BlogPostRow[] = BLOG_POSTS.map((p) => ({
   id: p.slug,
   slug: p.slug,
   title: p.title,

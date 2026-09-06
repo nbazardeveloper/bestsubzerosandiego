@@ -1,61 +1,62 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
 import { MapPin } from "lucide-react";
 import { FinalCta } from "@/components/site/FinalCta";
 
 const AREAS = [
   {
-    name: "Staten Island",
+    name: "San Diego",
     blurb:
-      "Our home base. We know Staten Island neighborhoods and can typically reach customers same day when schedules allow.",
+      "Our home base. We know San Diego neighborhoods and can typically reach customers same day when schedules allow.",
   },
   {
-    name: "Brooklyn",
+    name: "La Jolla",
     blurb:
-      "Regular routes throughout Brooklyn, from brownstones to modern condos with built-in Sub-Zero and Wolf.",
+      "Regular routes throughout La Jolla, from oceanfront condos to hillside homes with built-in Sub-Zero and Wolf.",
   },
   {
-    name: "Queens",
+    name: "Pacific Beach",
     blurb:
-      "Coverage across Queens for premium refrigeration, ranges and ovens in single-family and multi-family homes.",
+      "Coverage across Pacific Beach for premium refrigeration, ranges and ovens in single-family and multi-family homes.",
   },
   {
-    name: "Long Island (near Queens)",
+    name: "Coronado",
+    blurb: "Frequent service across Coronado's island neighborhoods and beachfront properties.",
+  },
+  {
+    name: "Del Mar",
+    blurb: "Regular appointments in Del Mar and surrounding coastal North County communities.",
+  },
+  {
+    name: "Chula Vista",
     blurb:
-      "Long Island is long, so our coverage is limited to the Nassau County communities closest to the Queens border — Great Neck, Manhasset, New Hyde Park and Floral Park. We don't currently reach central or eastern Nassau, or Suffolk County.",
+      "High-rise and single-family service across Chula Vista for premium residential kitchens.",
   },
   {
-    name: "Great Neck",
-    blurb: "Frequent service in Great Neck and surrounding North Shore communities.",
+    name: "National City",
+    blurb: "Serving National City homeowners for repair and preventive maintenance.",
   },
   {
-    name: "Jersey City",
-    blurb: "High-rise and townhouse service across Jersey City for premium residential kitchens.",
-  },
-  {
-    name: "Elizabeth, NJ",
-    blurb: "Serving Elizabeth NJ homeowners for repair and preventive maintenance.",
-  },
-  {
-    name: "North & Central NJ",
+    name: "North County San Diego",
     blurb:
-      "Broader coverage across North and Central New Jersey for high-end residential appliances.",
+      "Broader coverage across North County — Carlsbad, Encinitas and Oceanside — for high-end residential appliances.",
   },
 ];
 
 export const Route = createFileRoute("/service-area")({
   head: () => ({
     meta: [
-      { title: "Service Area | Sub-Zero & Viking Repair Coverage in NY & NJ" },
+      { title: "Service Area | Sub-Zero & Viking Repair in San Diego" },
       {
         name: "description",
         content:
-          "We repair premium kitchen appliances across Staten Island, Brooklyn, Queens, Long Island near Queens, Jersey City, Elizabeth NJ and North & Central New Jersey.",
+          "We repair premium kitchen appliances across San Diego, La Jolla, Pacific Beach, Coronado, Del Mar, Chula Vista and North County San Diego.",
       },
       { property: "og:title", content: "Service Area" },
       { property: "og:description", content: "Where we repair premium kitchen appliances." },
       { property: "og:url", content: absUrl("/service-area") },
       { property: "og:image", content: DEFAULT_OG_IMAGE },
+      ...twitterMeta("Service Area", "Where we repair premium kitchen appliances."),
     ],
     links: [{ rel: "canonical", href: absUrl("/service-area") }],
   }),
@@ -71,9 +72,8 @@ function ServiceArea() {
             Service <span className="text-accent">area</span>
           </h1>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            We serve homeowners across the New York metro and Northern &amp; Central New Jersey.
-            Same-day service depends on technician availability — we'll tell you honestly when we
-            can be there.
+            We serve homeowners across San Diego and North County. Same-day service depends on
+            technician availability — we'll tell you honestly when we can be there.
           </p>
         </div>
       </section>
@@ -93,16 +93,15 @@ function ServiceArea() {
       <section className="border-t border-border bg-muted/30">
         <div className="mx-auto max-w-7xl px-4 py-16 md:px-8">
           <h2 className="text-2xl font-semibold tracking-tight md:text-3xl">
-            Our completed <span className="text-accent">jobs</span>
+            Where we <span className="text-accent">work</span>
           </h2>
           <p className="mt-3 text-muted-foreground">
-            A real map of repairs we've completed across the New York metro and New Jersey —
-            centered on Staten Island, radiating out through the service area above.
+            Centered on San Diego, radiating out through the service area above.
           </p>
           <div className="mt-8 h-[420px] overflow-hidden rounded-lg border border-border md:h-[640px]">
             <iframe
-              title="Map of completed appliance repair jobs"
-              src="https://www.google.com/maps/d/embed?mid=1KRsUeTkfj5YfyxZIZ93085Ynm4D4Cz0&ll=40.63165163668629%2C-74.13427010000002&z=10"
+              title="Map of the San Diego service area"
+              src="https://www.google.com/maps?q=San+Diego,+CA&output=embed"
               width="100%"
               height="100%"
               className="border-0"
@@ -111,15 +110,7 @@ function ServiceArea() {
             />
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
-            <a
-              href="https://www.google.com/maps/d/u/0/viewer?mid=1KRsUeTkfj5YfyxZIZ93085Ynm4D4Cz0&ll=40.63165163668629%2C-74.13427010000002&z=10"
-              target="_blank"
-              rel="noreferrer noopener"
-              className="text-accent hover:underline"
-            >
-              Open the full map
-            </a>{" "}
-            · Not sure if we cover your address?{" "}
+            Not sure if we cover your address?{" "}
             <Link to="/contact" className="text-accent hover:underline">
               Send us a request
             </Link>{" "}

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
 import {
   Accordion,
   AccordionContent,
@@ -15,7 +15,7 @@ const FAQ = [
   },
   {
     q: "How much is the diagnostic fee?",
-    a: "The diagnostic fee is $95 ($125 in Manhattan), and it's waived when you complete the repair with us.",
+    a: "The diagnostic fee is $95, and it's waived when you complete the repair with us.",
   },
   {
     q: "Do you use OEM parts?",
@@ -43,7 +43,7 @@ const FAQ = [
   },
   {
     q: "Where do you provide service?",
-    a: "We serve Staten Island, Brooklyn, Queens, Long Island near Queens (Great Neck and nearby Nassau towns), Jersey City, Elizabeth, and North & Central New Jersey.",
+    a: "We serve San Diego, La Jolla, Pacific Beach, Coronado, Del Mar, Chula Vista, National City, and North County San Diego.",
   },
   {
     q: "Do you service commercial appliances?",
@@ -58,7 +58,7 @@ const FAQ = [
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ | Appliance Repair Questions Answered | NY & NJ Service" },
+      { title: "FAQ | Appliance Repair Questions Answered | San Diego" },
       {
         name: "description",
         content:
@@ -68,6 +68,7 @@ export const Route = createFileRoute("/faq")({
       { property: "og:description", content: "Answers to common appliance-repair questions." },
       { property: "og:url", content: absUrl("/faq") },
       { property: "og:image", content: DEFAULT_OG_IMAGE },
+      ...twitterMeta("Frequently Asked Questions", "Answers to common appliance-repair questions."),
     ],
     links: [{ rel: "canonical", href: absUrl("/faq") }],
     scripts: [

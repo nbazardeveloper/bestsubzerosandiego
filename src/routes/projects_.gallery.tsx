@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { ArrowLeft } from "lucide-react";
@@ -10,11 +10,11 @@ import { FinalCta } from "@/components/site/FinalCta";
 export const Route = createFileRoute("/projects_/gallery")({
   head: () => ({
     meta: [
-      { title: "Project Photo Gallery | Sub-Zero, Viking & Wolf | NY & NJ" },
+      { title: "Project Photo Gallery | Sub-Zero, Viking & Wolf | San Diego" },
       {
         name: "description",
         content:
-          "Photos from appliance repair projects completed across Staten Island, Brooklyn, Long Island near Queens and New Jersey.",
+          "Photos from Sub-Zero, Viking and Wolf appliance repair projects completed across San Diego, La Jolla, Coronado and Chula Vista kitchens.",
       },
       { property: "og:title", content: "Project Photo Gallery" },
       {
@@ -23,6 +23,10 @@ export const Route = createFileRoute("/projects_/gallery")({
       },
       { property: "og:url", content: absUrl("/projects/gallery") },
       { property: "og:image", content: DEFAULT_OG_IMAGE },
+      ...twitterMeta(
+        "Project Photo Gallery",
+        "Photos from appliance repair projects we've completed.",
+      ),
     ],
     links: [{ rel: "canonical", href: absUrl("/projects/gallery") }],
   }),
@@ -63,6 +67,8 @@ function GalleryPage() {
           >
             <ArrowLeft className="h-4 w-4" aria-hidden /> Back to projects
           </Link>
+
+          <h1 className="mt-6 text-3xl font-semibold tracking-tight md:text-4xl">Photo gallery</h1>
 
           <div className="mt-6 flex flex-wrap gap-2">
             <Button

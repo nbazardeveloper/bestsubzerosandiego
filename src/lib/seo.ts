@@ -4,7 +4,7 @@
 // (DB-driven) content such as individual service pages.
 
 const SITE_NAME = "Best Sub-Zero & Viking Service";
-const SITE_URL = "https://bestsubzerovikingservices.com";
+const SITE_URL = "https://subzerovikingrepairpro.com";
 
 /**
  * Turns a site-relative path into an absolute URL. Canonical links and
@@ -24,13 +24,50 @@ export function absUrl(path: string): string {
  */
 export const DEFAULT_OG_IMAGE = absUrl("/images/hero.webp");
 
+/**
+ * Shared identity fields for the Organization/LocalBusiness JSON-LD blocks
+ * declared across __root.tsx, index.tsx, contact.tsx and services_.$slug.tsx
+ * — kept in one place so the entity stays consistent (same "@id", address,
+ * hours) everywhere it's declared, which matters for Google associating them
+ * as the same business rather than several distinct ones.
+ */
+export const ORG_ID = absUrl("/#organization");
+
+export const LOCAL_BUSINESS_ADDRESS = {
+  "@type": "PostalAddress",
+  addressLocality: "San Diego",
+  addressRegion: "CA",
+  addressCountry: "US",
+} as const;
+
+export const LOCAL_BUSINESS_HOURS = {
+  "@type": "OpeningHoursSpecification",
+  dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  opens: "08:00",
+  closes: "19:00",
+} as const;
+
+/**
+ * Twitter Card tags mirroring a page's og:title/description/image. Twitter
+ * falls back to the og: equivalents when these are absent, but not every
+ * validator/crawler implements that fallback, so every page sets them
+ * explicitly.
+ */
+export function twitterMeta(title: string, description: string, image: string = DEFAULT_OG_IMAGE) {
+  return [
+    { name: "twitter:title", content: title },
+    { name: "twitter:description", content: description },
+    { name: "twitter:image", content: image },
+  ];
+}
+
 const TITLE_SUFFIXES = [
-  ` | Sub-Zero & Viking Repair Experts in NY & NJ`,
+  ` | Sub-Zero & Viking Repair Experts in San Diego`,
   ` | Sub-Zero & Viking Repair Experts`,
   ` | ${SITE_NAME}`,
-  ` | NY & NJ Appliance Repair`,
-  ` | NY & NJ Repair`,
-  ` | NY & NJ`,
+  ` | San Diego Appliance Repair`,
+  ` | San Diego Repair`,
+  ` | San Diego`,
 ];
 
 /**

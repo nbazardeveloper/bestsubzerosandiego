@@ -24,8 +24,8 @@ export const SERVICE_CATEGORY_ICONS: Record<string, CategoryIcon> = {
   Maintenance: MaintenanceIcon,
 };
 
-// Per-service overrides, keyed by the service's `slug` (see db-stub.ts
-// MockService / the `services` table). Lets appliance-specific services
+// Per-service overrides, keyed by the service's `slug` (see site-data.ts's
+// `services` array). Lets appliance-specific services
 // within the same broad category (e.g. several "Cooking" services) show
 // their own icon instead of sharing one generic category icon.
 export const SERVICE_SLUG_ICONS: Record<string, CategoryIcon> = {

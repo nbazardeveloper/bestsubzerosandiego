@@ -1,37 +1,14 @@
-// Non-secret runtime variables, committed to source control so every
-// Cloudflare build/deploy always has them — Nitro's cloudflare-module
-// preset merges this file into the generated .output/server/wrangler.json
-// on every `npm run build` (see readWranglerConfig/writeWranglerConfig in
-// nitro's Cloudflare preset).
+// Cloudflare Worker deployment config. The site has no database or admin
+// backend, so there are no environment variables or secrets to declare here
+// anymore — this Worker only does SSR rendering of static content.
 //
-// Why this file exists: env vars entered as plain "Environment Variables"
-// in the Cloudflare dashboard are NOT guaranteed to survive every rebuild —
-// a new deployment/version generated from this repo's own wrangler.json can
-// come back without them unless they're declared here. That's the
-// "keys keep disappearing after deploy" problem. Declaring the safe,
-// non-secret ones here fixes it for good, since they now ship with the
-// code itself instead of depending on dashboard state.
+// Deploy with: npm run build && npx wrangler deploy
 //
-// SUPABASE_PUBLISHABLE_KEY is Supabase's public/anon key — safe to expose
-// (it's already shipped to every visitor's browser via the VITE_-prefixed
-// build-time copy of the same value, protected by Supabase Row Level
-// Security, not by secrecy). SITE_URL is just the public site domain.
-//
-// Do NOT add SUPABASE_SERVICE_ROLE_KEY, SORO_WEBHOOK_SECRET, or
-// GHL_WEBHOOK_URL here — those are real secrets (service role bypasses Row
-// Level Security entirely; the webhook secret authenticates inbound
-// requests; the GHL webhook URL itself acts as the auth token for pushing
-// leads into the CRM) and must never be committed to git. Set those in the
-// Cloudflare dashboard as a "Secret" (encrypted), not a plaintext
-// "Environment Variable" — Secrets are stored independently of the deployed
-// code/config and are NOT wiped by rebuilds, which is exactly what
-// plaintext dashboard vars are missing here. See Settings -> Variables and
-// Secrets on the Worker in the Cloudflare dashboard, and use "Secret" as the
-// type when adding them.
+// To serve this through Cloudflare Pages instead of a standalone Worker, add
+// a Pages project in "Advanced Mode" pointed at this build output (it
+// includes the Worker script Pages expects for that mode) — see the note in
+// vite.config.ts for why a fully static Pages export isn't used yet.
 {
-  "vars": {
-    "SUPABASE_URL": "https://iuthigfkpmrppknefnju.supabase.co",
-    "SUPABASE_PUBLISHABLE_KEY": "sb_publishable_FasnuCcD_FsN1ufOhr2INg_DWhcl3d7",
-    "SITE_URL": "https://bestsubzerovikingservices.com"
-  }
+  "name": "best-sub-zero-viking-san-diego",
+  "compatibility_date": "2026-08-31"
 }

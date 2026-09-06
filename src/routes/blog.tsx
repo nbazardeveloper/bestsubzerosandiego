@@ -1,17 +1,10 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
-import { absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
+import { absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
+import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { FinalCta } from "@/components/site/FinalCta";
+import { listBlogPosts } from "@/lib/site.functions";
 
-const SORO_EMBED_SRC = "https://app.trysoro.com/api/embed/dde6d064-824d-4996-93f6-494a8776867f";
-
-// The blog is published through Soro (trysoro.com) — new articles are
-// written and auto-published by Soro directly into this embed, not through
-// our own Supabase blog_posts table. That table/route (post.$slug.tsx) is
-// leftover from before this switch; nothing links to it anymore, but it's
-// left in place rather than deleted in case it's already indexed somewhere.
-// See Soro's dashboard -> Settings -> Blog Widget -> Manage for this
-// embed snippet (id/script pair are tied to this Soro account+site).
 export const Route = createFileRoute("/blog")({
   head: () => ({
     meta: [
@@ -19,40 +12,29 @@ export const Route = createFileRoute("/blog")({
       {
         name: "description",
         content:
-          "Guides and tips on Sub-Zero, Viking and Wolf appliance repair — diagnostics, common problems, costs and what to expect, for homeowners in NY and NJ.",
+          "Guides and tips on Sub-Zero, Viking and Wolf appliance repair — diagnostics, common problems, costs and what to expect, for San Diego homeowners.",
       },
       { property: "og:title", content: "Appliance Repair Blog" },
       { property: "og:description", content: "Sub-Zero, Viking and Wolf repair guides and tips." },
       { property: "og:url", content: absUrl("/blog") },
       { property: "og:image", content: DEFAULT_OG_IMAGE },
+      ...twitterMeta("Appliance Repair Blog", "Sub-Zero, Viking and Wolf repair guides and tips."),
     ],
     links: [{ rel: "canonical", href: absUrl("/blog") }],
   }),
+  loader: ({ context }) =>
+    context.queryClient.ensureQueryData({
+      queryKey: ["blog-posts"],
+      queryFn: () => listBlogPosts(),
+    }),
   component: BlogIndex,
 });
 
 function BlogIndex() {
-  // The Soro embed script mutates the #soro-blog div directly (it injects
-  // its own article list into it). Rendering <script src=...> straight in
-  // JSX put it in the server-rendered HTML, so on a slow-ish hydration it
-  // could run and populate that div *before* React finished hydrating —
-  // React then sees a div with unexpected children it didn't put there
-  // itself, treats it as a hydration mismatch (React error #418), and wipes
-  // the mismatched subtree back to empty. That's why the articles rendered
-  // sometimes and vanished other times instead of failing consistently.
-  //
-  // Loading the script from an effect instead guarantees it never touches
-  // the DOM until after React has fully mounted/hydrated this page, so
-  // there's no window for a mismatch. Guard against adding it twice (e.g.
-  // React StrictMode's double-invoke in dev, or remounting via client-side
-  // nav back to /blog) by checking for an existing tag with the same src.
-  useEffect(() => {
-    if (document.querySelector(`script[src="${SORO_EMBED_SRC}"]`)) return;
-    const script = document.createElement("script");
-    script.src = SORO_EMBED_SRC;
-    script.defer = true;
-    document.body.appendChild(script);
-  }, []);
+  const { data: posts = [] } = useQuery({
+    queryKey: ["blog-posts"],
+    queryFn: () => listBlogPosts(),
+  });
 
   return (
     <div>
@@ -61,13 +43,45 @@ function BlogIndex() {
           <h1 className="text-4xl font-semibold tracking-tight md:text-5xl">Blog</h1>
           <p className="mt-4 max-w-2xl text-muted-foreground">
             Guides, diagnostics and tips for owners of Sub-Zero, Viking and Wolf appliances across
-            NY &amp; NJ.
+            San Diego.
           </p>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-10 md:px-8">
-        <div id="soro-blog" suppressHydrationWarning />
+        <div className="grid gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <Link
+              key={post.slug}
+              to="/post/$slug"
+              params={{ slug: post.slug }}
+              className="group flex flex-col overflow-hidden rounded-lg border border-border bg-card"
+            >
+              <ImagePlaceholder
+                aspect="video"
+                label={post.title}
+                src={post.hero_image}
+                alt={post.title}
+              />
+              <div className="flex flex-1 flex-col p-6">
+                <p className="text-xs text-muted-foreground">
+                  {new Date(post.published_at).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+                <h2 className="mt-2 text-lg font-semibold tracking-tight group-hover:text-accent">
+                  {post.title}
+                </h2>
+                <p className="mt-2 flex-1 text-sm text-muted-foreground">{post.meta_description}</p>
+              </div>
+            </Link>
+          ))}
+          {posts.length === 0 ? (
+            <p className="text-sm text-muted-foreground">No articles published yet.</p>
+          ) : null}
+        </div>
       </section>
 
       <FinalCta />

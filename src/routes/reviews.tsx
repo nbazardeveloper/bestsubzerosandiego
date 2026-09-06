@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
 import { useQuery } from "@tanstack/react-query";
 import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -11,16 +11,17 @@ import { FinalCta } from "@/components/site/FinalCta";
 export const Route = createFileRoute("/reviews")({
   head: () => ({
     meta: [
-      { title: "Customer Reviews | Best Sub-Zero & Viking Service NY & NJ" },
+      { title: "Customer Reviews | Best Sub-Zero & Viking Service San Diego" },
       {
         name: "description",
         content:
-          "Read what customers say about our premium appliance repair service. Real feedback and Google reviews from Sub-Zero, Viking and Wolf owners across NY and NJ.",
+          "Read what customers say about our premium appliance repair service. Real feedback and Google reviews from Sub-Zero, Viking and Wolf owners across San Diego.",
       },
       { property: "og:title", content: "Customer Reviews" },
-      { property: "og:description", content: "Feedback from NY & NJ customers." },
+      { property: "og:description", content: "Feedback from San Diego customers." },
       { property: "og:url", content: absUrl("/reviews") },
       { property: "og:image", content: DEFAULT_OG_IMAGE },
+      ...twitterMeta("Customer Reviews", "Feedback from San Diego customers."),
     ],
     links: [{ rel: "canonical", href: absUrl("/reviews") }],
   }),
@@ -43,8 +44,8 @@ function Reviews() {
             Customer <span className="text-accent">reviews</span>
           </h1>
           <p className="mt-4 max-w-2xl text-muted-foreground">
-            We're proud of the reputation we've built repairing premium kitchen appliances across NY
-            &amp; NJ.
+            We're proud of the reputation we've built repairing premium kitchen appliances across
+            San Diego.
           </p>
 
           {settings?.review_rating ? (

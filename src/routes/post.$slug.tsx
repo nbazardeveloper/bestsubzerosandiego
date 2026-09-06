@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft } from "lucide-react";
 import { getBlogPostBySlug } from "@/lib/site.functions";
-import { buildTitle, buildMetaDescription, absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { buildTitle, buildMetaDescription, absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
 import { FinalCta } from "@/components/site/FinalCta";
 
 // A paragraph entry is treated as a subheading (not body copy) when it's
@@ -25,6 +25,7 @@ export const Route = createFileRoute("/post/$slug")({
     const { post } = loaderData;
     const title = buildTitle(post.title);
     const description = buildMetaDescription(post.meta_description, post.paragraphs.join(" "));
+    const ogImage = post.hero_image ?? DEFAULT_OG_IMAGE;
     return {
       meta: [
         { title },
@@ -33,7 +34,8 @@ export const Route = createFileRoute("/post/$slug")({
         { property: "og:description", content: description },
         { property: "og:url", content: absUrl(`/post/${post.slug}`) },
         { property: "og:type", content: "article" },
-        { property: "og:image", content: post.hero_image ?? DEFAULT_OG_IMAGE },
+        { property: "og:image", content: ogImage },
+        ...twitterMeta(post.title, description, ogImage),
       ],
       links: [{ rel: "canonical", href: absUrl(`/post/${post.slug}`) }],
       scripts: [

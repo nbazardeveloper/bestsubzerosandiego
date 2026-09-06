@@ -24,7 +24,7 @@ export function SiteHeader() {
     queryFn: () => getSiteSettings(),
     staleTime: 5 * 60 * 1000,
   });
-  const phone = settings?.phone ?? "+1 (888) 702-8565";
+  const phone = settings?.phone ?? "+1 (619) 975-4755";
   const telHref = `tel:${phone.replace(/[^+\d]/g, "")}`;
 
   return (
@@ -46,10 +46,14 @@ export function SiteHeader() {
         </Link>
 
         {/* Mobile logo — no CTA bar on mobile, so a normal small logo is fine.
-            No aria-label here: the visible name text already gives this link
-            an accessible name, and the logo is decorative (alt="") so it
-            doesn't get concatenated into a mismatched accessible name. */}
-        <Link to="/" className="flex items-center gap-3 md:hidden">
+            Business name text is hidden here (logo-only); the accessible
+            name moves to the link's aria-label since there's no visible
+            text for it to come from anymore. */}
+        <Link
+          to="/"
+          aria-label="Best Sub-Zero & Viking Service — home"
+          className="flex items-center gap-3 md:hidden"
+        >
           <img
             src="/images/logo.webp"
             alt=""
@@ -57,9 +61,6 @@ export function SiteHeader() {
             height={420}
             className="h-12 w-auto flex-shrink-0"
           />
-          <span className="text-base font-semibold tracking-tight">
-            Best Sub-Zero &amp; Viking Service
-          </span>
         </Link>
 
         {/* Business name/tagline — pushed right to clear the big logo. Hidden
@@ -70,7 +71,7 @@ export function SiteHeader() {
             Best Sub-Zero &amp; Viking Service
           </span>
           <span className="text-sm text-muted-foreground">
-            Premium appliance repair · NY &amp; NJ
+            Premium appliance repair · San Diego
           </span>
         </div>
 

@@ -16,14 +16,14 @@ import { VenmoIcon, ZelleIcon } from "@/components/site/icons/PaymentIcons";
 import { getSiteSettings } from "@/lib/site.functions";
 
 const AREAS = [
-  "Staten Island",
-  "Brooklyn",
-  "Queens",
-  "Long Island (near Queens)",
-  "Great Neck",
-  "Jersey City",
-  "Elizabeth, NJ",
-  "North & Central NJ",
+  "San Diego",
+  "La Jolla",
+  "Pacific Beach",
+  "Coronado",
+  "Del Mar",
+  "Chula Vista",
+  "National City",
+  "North County San Diego",
 ];
 
 const PAYMENT_METHODS = [
@@ -59,7 +59,7 @@ export function SiteFooter() {
           </div>
           <p className="mt-4 max-w-xs text-sm text-primary-foreground/70">
             Honest, expert repair for Sub-Zero, Viking, Wolf and other premium residential kitchen
-            appliances, serving NY &amp; NJ. Residential appliance repair only.
+            appliances, serving San Diego. Residential appliance repair only.
           </p>
           {s?.social_links?.google_reviews || s?.social_links?.yelp ? (
             <div className="mt-5 flex flex-wrap gap-2">
@@ -247,17 +247,6 @@ export function SiteFooter() {
               </span>
             ))}
           </div>
-        </div>
-      </div>
-
-      <div className="border-t border-white/10">
-        <div className="mx-auto max-w-7xl px-4 py-5 md:px-8">
-          <a href="https://patch.com/new-york/new-york-city/business/listing/574012/best-sub-zero-viking-service?utm_source=badge&utm_medium=referral&utm_campaign=business_badge">
-            <img
-              src="https://patch.com/api_v1/bizpost/574012/badge"
-              alt="Best Sub-Zero & Viking Service on Patch"
-            />
-          </a>
         </div>
       </div>
 

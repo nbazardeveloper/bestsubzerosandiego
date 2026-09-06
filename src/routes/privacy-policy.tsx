@@ -1,10 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy | Best Sub-Zero & Viking Service NY & NJ" },
+      { title: "Privacy Policy | Best Sub-Zero & Viking Service San Diego" },
       {
         name: "description",
         content:
@@ -14,6 +14,7 @@ export const Route = createFileRoute("/privacy-policy")({
       { property: "og:description", content: "Our privacy policy." },
       { property: "og:url", content: absUrl("/privacy-policy") },
       { property: "og:image", content: DEFAULT_OG_IMAGE },
+      ...twitterMeta("Privacy Policy", "Our privacy policy."),
     ],
     links: [{ rel: "canonical", href: absUrl("/privacy-policy") }],
   }),
@@ -76,8 +77,8 @@ function Privacy() {
 
         <h2>Contact</h2>
         <p>
-          Best Sub-Zero &amp; Viking Service — +1 (888) 702-8565 —
-          info@bestsubzerovikingservices.com.
+          Best Sub-Zero &amp; Viking Service — +1 (619) 975-4755 —
+          subzerovikingrepair.pro@gmail.com.
         </p>
       </div>
     </div>

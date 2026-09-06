@@ -1,11 +1,16 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { absUrl } from "@/lib/seo";
+import {
+  absUrl,
+  ORG_ID,
+  LOCAL_BUSINESS_ADDRESS,
+  LOCAL_BUSINESS_HOURS,
+  twitterMeta,
+} from "@/lib/seo";
 import { useQuery } from "@tanstack/react-query";
 import { Phone, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { GuaranteeBadge } from "@/components/site/GuaranteeBadge";
-import { AnniversaryBadge } from "@/components/site/AnniversaryBadge";
 import { ReviewsBar } from "@/components/site/ReviewsBar";
 import { SpecialistBrandsBand } from "@/components/site/SpecialistBrandsBand";
 import { BrandsMarquee } from "@/components/site/BrandsMarquee";
@@ -28,7 +33,7 @@ const ADVANTAGES = [
   {
     icon: YearsIcon,
     title: "Proven Experience",
-    body: "Insured & certified technicians servicing Sub-Zero, Wolf & Viking appliances across NY & NJ.",
+    body: "Insured & certified technicians servicing Sub-Zero, Wolf & Viking appliances across San Diego.",
   },
   {
     icon: DiagnosticsIcon,
@@ -64,7 +69,7 @@ const FAQ_PREVIEW = [
   },
   {
     q: "How much is the diagnostic fee?",
-    a: "The diagnostic fee is $95 ($125 in Manhattan), waived when you complete the repair with us.",
+    a: "The diagnostic fee is $95, waived when you complete the repair with us.",
   },
   {
     q: "Do you use OEM parts?",
@@ -111,23 +116,28 @@ export const Route = createFileRoute("/")({
 
     return {
       meta: [
-        { title: "Best Sub-Zero & Viking Service | NY & NJ Appliance Repair" },
+        { title: "Best Sub-Zero & Viking Service | San Diego Appliance Repair" },
         {
           name: "description",
           content:
-            "Premium repair for Sub-Zero, Viking, Wolf and other high-end kitchen appliances across Staten Island, Brooklyn, Queens and New Jersey. Call today.",
+            "Premium repair for Sub-Zero, Viking, Wolf and other high-end kitchen appliances across San Diego, La Jolla, Pacific Beach and Coronado. Call today.",
         },
         { property: "og:title", content: "Best Sub-Zero & Viking Service" },
         {
           property: "og:description",
           content:
-            "Honest, expert repair of premium residential kitchen appliances across NY & NJ.",
+            "Honest, expert repair of premium residential kitchen appliances across San Diego.",
         },
         { property: "og:url", content: absUrl("/") },
         {
           property: "og:image",
-          content: "https://bestsubzerovikingservices.com/images/hero.webp",
+          content: "https://subzerovikingrepairpro.com/images/hero.webp",
         },
+        ...twitterMeta(
+          "Best Sub-Zero & Viking Service",
+          "Honest, expert repair of premium residential kitchen appliances across San Diego.",
+          "https://subzerovikingrepairpro.com/images/hero.webp",
+        ),
       ],
       links: [{ rel: "canonical", href: absUrl("/") }],
       scripts: [
@@ -136,20 +146,24 @@ export const Route = createFileRoute("/")({
           children: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
+            "@id": ORG_ID,
             name: "Best Sub-Zero & Viking Service",
-            telephone: "+1-888-702-8565",
-            email: "info@bestsubzerovikingservices.com",
-            image: "https://bestsubzerovikingservices.com/images/hero.webp",
+            telephone: "+1-619-975-4755",
+            email: "subzerovikingrepair.pro@gmail.com",
+            url: absUrl("/"),
+            image: "https://subzerovikingrepairpro.com/images/hero.webp",
             priceRange: "$$",
+            address: LOCAL_BUSINESS_ADDRESS,
+            openingHoursSpecification: LOCAL_BUSINESS_HOURS,
             areaServed: [
-              "Staten Island",
-              "Brooklyn",
-              "Queens",
-              "Long Island (near Queens)",
-              "Great Neck",
-              "Jersey City",
-              "Elizabeth NJ",
-              "North & Central New Jersey",
+              "San Diego",
+              "La Jolla",
+              "Pacific Beach",
+              "Coronado",
+              "Del Mar",
+              "Chula Vista",
+              "National City",
+              "North County San Diego",
             ],
             ...aggregateRating,
           }),
@@ -174,7 +188,7 @@ function Home() {
     queryFn: () => listFeaturedProjects(),
   });
 
-  const phone = settings?.phone ?? "+1 (888) 702-8565";
+  const phone = settings?.phone ?? "+1 (619) 975-4755";
   const telHref = `tel:${phone.replace(/[^+\d]/g, "")}`;
 
   return (
@@ -207,7 +221,7 @@ function Home() {
             </h1>
             <p className="mt-5 max-w-xl text-base text-white drop-shadow-[0_2px_8px_rgba(0,0,0,0.7)] md:text-lg">
               Accurate diagnostics, transparent pricing and long-lasting repairs for high-end
-              residential appliances across New York and New Jersey.
+              residential appliances across San Diego.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a href={telHref}>
@@ -229,8 +243,6 @@ function Home() {
               <GuaranteeBadge variant="dark" className="w-fit" />
             </div>
           </div>
-
-          <AnniversaryBadge className="absolute bottom-4 right-4 hidden md:flex md:bottom-8 md:right-8" />
         </div>
       </section>
 
@@ -366,7 +378,7 @@ function Home() {
                 Recent <span className="text-accent">projects</span>
               </h2>
               <p className="mt-3 text-muted-foreground">
-                A sample of repairs completed for customers across NY &amp; NJ.
+                A sample of repairs completed for customers across San Diego.
               </p>
             </div>
             <Link
@@ -445,23 +457,22 @@ function Home() {
         <div className="grid gap-10 md:grid-cols-2">
           <div>
             <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">
-              Serving NY &amp; NJ <span className="text-accent">homes</span>
+              Serving San Diego <span className="text-accent">homes</span>
             </h2>
             <p className="mt-3 max-w-xl text-muted-foreground">
-              We're based in the New York metro and cover Staten Island, Brooklyn, Queens, Long
-              Island near Queens, Great Neck, Jersey City, Elizabeth NJ and North &amp; Central New
-              Jersey.
+              We're based in San Diego and cover La Jolla, Pacific Beach, Coronado, Del Mar, Chula
+              Vista, National City and North County San Diego.
             </p>
             <ul className="mt-6 grid grid-cols-2 gap-2 text-sm">
               {[
-                "Staten Island",
-                "Brooklyn",
-                "Queens",
-                "Long Island (near Queens)",
-                "Great Neck",
-                "Jersey City",
-                "Elizabeth, NJ",
-                "North & Central NJ",
+                "San Diego",
+                "La Jolla",
+                "Pacific Beach",
+                "Coronado",
+                "Del Mar",
+                "Chula Vista",
+                "National City",
+                "North County San Diego",
               ].map((a) => (
                 <li key={a} className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 text-accent" aria-hidden /> {a}
@@ -477,8 +488,8 @@ function Home() {
           </div>
           <div className="h-[420px] overflow-hidden rounded-lg border border-border md:h-[640px]">
             <iframe
-              title="Map of completed appliance repair jobs across NY & NJ"
-              src="https://www.google.com/maps/d/embed?mid=1KRsUeTkfj5YfyxZIZ93085Ynm4D4Cz0&ll=40.63165163668629%2C-74.13427010000002&z=10"
+              title="Map of the San Diego service area"
+              src="https://www.google.com/maps?q=San+Diego,+CA&output=embed"
               width="100%"
               height="100%"
               className="border-0"

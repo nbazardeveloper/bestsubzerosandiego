@@ -1,37 +1,11 @@
-import { createServerFn } from "@tanstack/react-start";
-import { createClient } from "@supabase/supabase-js";
-import type { Database } from "@/integrations/supabase/types";
-import { DB_STUBBED, mockSiteSettings, mockServices, mockProjects, mockBlogPosts } from "./db-stub";
-
-function serverPublicClient() {
-  // Prefer the build-time VITE_ vars (baked into the bundle by Vite and
-  // unaffected by Cloudflare "Retry build" runs, which reset plaintext
-  // runtime vars/secrets that aren't declared in wrangler.json) and fall
-  // back to the runtime env vars for local/dev.
-  const url = import.meta.env.VITE_SUPABASE_URL || process.env.SUPABASE_URL;
-  const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || process.env.SUPABASE_PUBLISHABLE_KEY;
-  if (!url || !key) {
-    const missing = [
-      ...(!url ? ["SUPABASE_URL"] : []),
-      ...(!key ? ["SUPABASE_PUBLISHABLE_KEY"] : []),
-    ];
-    throw new Error(
-      `Missing Supabase environment variable(s): ${missing.join(", ")}. Set them in your .env file.`,
-    );
-  }
-  return createClient<Database>(url, key, {
-    auth: { storage: undefined, persistSession: false, autoRefreshToken: false },
-    global: {
-      fetch: (input, init) => {
-        const h = new Headers(init?.headers);
-        if (key.startsWith("sb_") && h.get("Authorization") === `Bearer ${key}`)
-          h.delete("Authorization");
-        h.set("apikey", key);
-        return fetch(input, { ...init, headers: h });
-      },
-    },
-  });
-}
+// ============================================================================
+// SITE DATA ACCESSORS
+// ============================================================================
+// Plain functions over the static content in site-data.ts — no database, no
+// server round-trip. Kept as small async functions (rather than importing
+// site-data.ts directly everywhere) so every route that already calls these
+// through useQuery/loader `ensureQueryData` keeps working unchanged.
+// ============================================================================
 
 export type SiteSettings = {
   business_name: string;
@@ -47,214 +21,51 @@ export type SiteSettings = {
   yelp_review_rating: number | null;
 };
 
-export const getSiteSettings = createServerFn({ method: "GET" }).handler(
-  async (): Promise<SiteSettings> => {
-    if (DB_STUBBED) return mockSiteSettings;
-    const s = serverPublicClient();
-    const { data, error } = await s.from("site_settings").select("*").eq("id", 1).maybeSingle();
-    if (error) throw new Error(error.message);
-    if (!data) throw new Error("Site settings missing");
-    return {
-      business_name: data.business_name,
-      phone: data.phone,
-      email: data.email,
-      address: data.address,
-      hours: data.hours,
-      diagnostic_fee: data.diagnostic_fee,
-      social_links: (data.social_links as Record<string, string>) ?? {},
-      review_count: data.review_count,
-      review_rating: data.review_rating,
-      yelp_review_count: data.yelp_review_count,
-      yelp_review_rating: data.yelp_review_rating,
-    };
-  },
-);
-
-export const listServices = createServerFn({ method: "GET" }).handler(async () => {
-  if (DB_STUBBED) return mockServices;
-  const s = serverPublicClient();
-  const { data, error } = await s
-    .from("services")
-    .select("*")
-    .eq("is_published", true)
-    .order("sort_order", { ascending: true });
-  if (error) throw new Error(error.message);
-  return data ?? [];
-});
-
-export const listFeaturedServices = createServerFn({ method: "GET" }).handler(async () => {
-  if (DB_STUBBED) return mockServices.filter((s) => s.is_featured);
-  const s = serverPublicClient();
-  const { data, error } = await s
-    .from("services")
-    .select("*")
-    .eq("is_published", true)
-    .eq("is_featured", true)
-    .order("sort_order", { ascending: true });
-  if (error) throw new Error(error.message);
-  return data ?? [];
-});
-
-export const getServiceBySlug = createServerFn({ method: "GET" })
-  .inputValidator((d: { slug: string }) => d)
-  .handler(async ({ data }) => {
-    if (DB_STUBBED) return mockServices.find((s) => s.slug === data.slug) ?? null;
-    const s = serverPublicClient();
-    const { data: row, error } = await s
-      .from("services")
-      .select("*")
-      .eq("slug", data.slug)
-      .eq("is_published", true)
-      .maybeSingle();
-    if (error) throw new Error(error.message);
-    return row;
-  });
-
-export const listProjects = createServerFn({ method: "GET" }).handler(async () => {
-  if (DB_STUBBED) return mockProjects;
-  const s = serverPublicClient();
-  const { data, error } = await s
-    .from("projects")
-    .select("*")
-    .eq("is_published", true)
-    .order("created_at", { ascending: false });
-  if (error) throw new Error(error.message);
-  return data ?? [];
-});
-
-export const listFeaturedProjects = createServerFn({ method: "GET" }).handler(async () => {
-  if (DB_STUBBED) return mockProjects.slice(0, 3);
-  const s = serverPublicClient();
-  const { data, error } = await s
-    .from("projects")
-    .select("*")
-    .eq("is_published", true)
-    .order("created_at", { ascending: false })
-    .limit(3);
-  if (error) throw new Error(error.message);
-  return data ?? [];
-});
-
-export const listBlogPosts = createServerFn({ method: "GET" }).handler(async () => {
-  if (DB_STUBBED)
-    return [...mockBlogPosts].sort((a, b) => (a.published_at < b.published_at ? 1 : -1));
-  const s = serverPublicClient();
-  const { data, error } = await s
-    .from("blog_posts")
-    .select("*")
-    .eq("is_published", true)
-    .order("published_at", { ascending: false });
-  if (error) throw new Error(error.message);
-  return data ?? [];
-});
-
-export const getBlogPostBySlug = createServerFn({ method: "GET" })
-  .inputValidator((d: { slug: string }) => d)
-  .handler(async ({ data }) => {
-    if (DB_STUBBED) return mockBlogPosts.find((p) => p.slug === data.slug) ?? null;
-    const s = serverPublicClient();
-    const { data: row, error } = await s
-      .from("blog_posts")
-      .select("*")
-      .eq("slug", data.slug)
-      .eq("is_published", true)
-      .maybeSingle();
-    if (error) throw new Error(error.message);
-    return row;
-  });
-
-// ============================================================================
-// CRM forwarding (GoHighLevel / LeadConnector)
-// ============================================================================
-// Every lead submitted through the site (Contact page form + chat widget)
-// still gets saved to Supabase first — that write is the source of truth for
-// /admin/leads. After that succeeds, we best-effort POST the same lead to
-// the client's CRM (GoHighLevel) so it shows up there too, without ever
-// failing/blocking the visitor's submission if the CRM is unreachable or
-// misconfigured.
-//
-// Setup: in GoHighLevel, create an Automation → Workflow, add a "Webhook"
-// trigger (or an "Inbound Webhook"), save it, and copy the URL it gives you
-// (looks like https://services.leadconnectorhq.com/hooks/<location-id>/webhook-trigger/<id>).
-// Set that URL as GHL_WEBHOOK_URL — locally in .env, and in production as a
-// Cloudflare Worker "Secret" (Settings → Variables and Secrets on the
-// Worker), not a plaintext var, since the URL itself acts as the auth token.
-// Leave it unset to disable CRM forwarding entirely (nothing breaks).
-function ghlWebhookUrl(): string | undefined {
-  return process.env.GHL_WEBHOOK_URL || undefined;
+export async function getSiteSettings(): Promise<SiteSettings> {
+  const { siteSettings } = await import("./site-data");
+  return siteSettings;
 }
 
-async function forwardLeadToCRM(data: {
-  name: string;
-  phone: string;
-  email?: string;
-  service_area?: string;
-  message?: string;
-  source_page?: string;
-}): Promise<void> {
-  const url = ghlWebhookUrl();
-  if (!url) return; // CRM forwarding not configured — no-op
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        full_name: data.name,
-        name: data.name,
-        phone: data.phone,
-        email: data.email || undefined,
-        service_area: data.service_area || undefined,
-        message: data.message || undefined,
-        source: data.source_page || "website",
-        submitted_at: new Date().toISOString(),
-      }),
-    });
-    if (!res.ok) {
-      console.error(`[ghl-webhook] CRM forward failed: ${res.status} ${await res.text()}`);
-    }
-  } catch (err) {
-    // Never let a CRM outage break lead capture on the site.
-    console.error("[ghl-webhook] CRM forward threw:", err instanceof Error ? err.message : err);
-  }
+export async function listServices() {
+  const { services } = await import("./site-data");
+  return services.filter((s) => s.is_published).sort((a, b) => a.sort_order - b.sort_order);
 }
 
-export const submitLead = createServerFn({ method: "POST" })
-  .inputValidator(
-    (d: {
-      name: string;
-      phone: string;
-      email?: string;
-      service_area?: string;
-      message?: string;
-      source_page?: string;
-    }) => {
-      if (!d.name || d.name.length < 1 || d.name.length > 200) throw new Error("Invalid name");
-      if (!d.phone || d.phone.length < 5 || d.phone.length > 40) throw new Error("Invalid phone");
-      if (d.email && d.email.length > 320) throw new Error("Invalid email");
-      if (d.message && d.message.length > 5000) throw new Error("Message too long");
-      return d;
-    },
-  )
-  .handler(async ({ data }) => {
-    if (DB_STUBBED) {
-      console.warn("[db-stub] submitLead called while DB is stubbed — lead was NOT saved:", data);
-      return { ok: true };
-    }
-    const s = serverPublicClient();
-    const { error } = await s.from("leads").insert({
-      name: data.name.trim(),
-      phone: data.phone.trim(),
-      email: data.email?.trim() || null,
-      service_area: data.service_area?.trim() || null,
-      message: data.message?.trim() || null,
-      source_page: data.source_page?.trim() || null,
-      status: "new",
-    });
-    if (error) throw new Error(error.message);
+export async function listFeaturedServices() {
+  const { services } = await import("./site-data");
+  return services
+    .filter((s) => s.is_published && s.is_featured)
+    .sort((a, b) => a.sort_order - b.sort_order);
+}
 
-    // Fire-and-forget: don't await-block the response on the CRM call, and
-    // never let it turn a successful save into a user-facing error.
-    void forwardLeadToCRM(data);
+export async function getServiceBySlug({ data }: { data: { slug: string } }) {
+  const { services } = await import("./site-data");
+  return services.find((s) => s.slug === data.slug && s.is_published) ?? null;
+}
 
-    return { ok: true };
-  });
+export async function listProjects() {
+  const { projects } = await import("./site-data");
+  return projects
+    .filter((p) => p.is_published)
+    .sort((a, b) => (a.created_at < b.created_at ? 1 : -1));
+}
+
+export async function listFeaturedProjects() {
+  const { projects } = await import("./site-data");
+  return projects
+    .filter((p) => p.is_published)
+    .sort((a, b) => (a.created_at < b.created_at ? 1 : -1))
+    .slice(0, 3);
+}
+
+export async function listBlogPosts() {
+  const { blogPosts } = await import("./site-data");
+  return [...blogPosts]
+    .filter((p) => p.is_published)
+    .sort((a, b) => (a.published_at < b.published_at ? 1 : -1));
+}
+
+export async function getBlogPostBySlug({ data }: { data: { slug: string } }) {
+  const { blogPosts } = await import("./site-data");
+  return blogPosts.find((p) => p.slug === data.slug && p.is_published) ?? null;
+}

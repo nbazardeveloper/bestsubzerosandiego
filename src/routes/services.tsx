@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { absUrl, DEFAULT_OG_IMAGE } from "@/lib/seo";
+import { absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
 import { useQuery } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
@@ -13,16 +13,20 @@ import { FinalCta } from "@/components/site/FinalCta";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Appliance Repair Services | Sub-Zero, Viking & Wolf Experts" },
+      { title: "Appliance Repair Services in San Diego | Sub-Zero & Viking" },
       {
         name: "description",
         content:
-          "Refrigerator, range, oven, cooktop, wine cooler, ice maker and ventilation repair for Sub-Zero, Viking, Wolf, Thermador and other premium brands in NY and NJ.",
+          "Refrigerator, range, oven, cooktop, wine cooler, ice maker and ventilation repair for Sub-Zero, Viking, Wolf, Thermador and other premium brands in San Diego.",
       },
       { property: "og:title", content: "Premium Appliance Repair Services" },
-      { property: "og:description", content: "All services we offer across NY & NJ." },
+      { property: "og:description", content: "All services we offer across San Diego." },
       { property: "og:url", content: absUrl("/services") },
       { property: "og:image", content: DEFAULT_OG_IMAGE },
+      ...twitterMeta(
+        "Premium Appliance Repair Services",
+        "All services we offer across San Diego.",
+      ),
     ],
     links: [{ rel: "canonical", href: absUrl("/services") }],
   }),

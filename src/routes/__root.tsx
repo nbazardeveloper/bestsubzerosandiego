@@ -6,18 +6,22 @@ import {
   useRouter,
   HeadContent,
   Scripts,
-  useMatches,
 } from "@tanstack/react-router";
-import { lazy, Suspense, useEffect, type ReactNode } from "react";
+import { lazy, Suspense, useEffect, useRef, useState, type ReactNode } from "react";
 import { CalendarClock } from "lucide-react";
 
 import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
 import { getSiteSettings } from "@/lib/site.functions";
-import { cn } from "@/lib/utils";
+import {
+  absUrl,
+  DEFAULT_OG_IMAGE,
+  ORG_ID,
+  LOCAL_BUSINESS_ADDRESS,
+  LOCAL_BUSINESS_HOURS,
+} from "@/lib/seo";
 
 // Toasts (sonner) are only ever triggered by form submissions (lead form,
 // admin, auth) — never needed for the initial render of any page. Loading
@@ -25,7 +29,7 @@ import { cn } from "@/lib/utils";
 // (including the homepage) would otherwise pay to parse/execute upfront.
 const Toaster = lazy(() => import("sonner").then((m) => ({ default: m.Toaster })));
 
-function NotFoundComponent() {
+export function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
@@ -87,17 +91,33 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Best Sub-Zero & Viking Service | NY & NJ Appliance Repair" },
+      { title: "Best Sub-Zero & Viking Service | San Diego Appliance Repair" },
       {
         name: "description",
         content:
-          "Premium residential appliance repair in NY & NJ — Sub-Zero, Viking, Wolf, Thermador, Bosch and Dacor. 13 years of honest, transparent, expert service.",
+          "Premium residential appliance repair in San Diego — Sub-Zero, Viking, Wolf, Thermador, Bosch and Dacor. Honest, transparent, expert service.",
       },
       { name: "author", content: "Best Sub-Zero & Viking Service" },
       { property: "og:site_name", content: "Best Sub-Zero & Viking Service" },
       { property: "og:type", content: "website" },
+      { property: "og:locale", content: "en_US" },
       { name: "twitter:card", content: "summary_large_image" },
+      // Site-wide fallback — pages with their own og:title/description/image
+      // override these via their own head()'s twitterMeta() call.
+      {
+        name: "twitter:title",
+        content: "Best Sub-Zero & Viking Service | San Diego Appliance Repair",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Premium residential appliance repair in San Diego — Sub-Zero, Viking, Wolf, Thermador, Bosch and Dacor.",
+      },
+      { name: "twitter:image", content: DEFAULT_OG_IMAGE },
       { name: "theme-color", content: "#0f1115" },
+      // TODO: this Bing site-verification token is tied to the old NY domain
+      // — replace with a new token once the San Diego domain is verified in
+      // Bing Webmaster Tools.
       { name: "msvalidate.01", content: "8603B5AEE860A3E9A624B9A128FDD7C7" },
     ],
     links: [
@@ -151,10 +171,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   i.parentNode.insertBefore(n,i)
 })(window,document,"script","https://bat.bing.com/bat.js","uetq");`,
       },
-      // GoHighLevel (LeadConnector) chat widget — replaces the site's old
-      // custom ChatWidget. Chat conversations captured here go straight to
-      // the CRM directly through GHL, not through Supabase, so they won't
-      // show up in /admin/leads (only the /contact form does).
+      // GoHighLevel (LeadConnector) chat widget — TODO: this widget id is
+      // tied to the original NY business's GHL location, so chats started
+      // here would currently route to their CRM/inbox, not a San Diego one.
+      // Either replace "data-widget-id" with a San Diego GHL location's own
+      // widget id, or remove this script entirely (lead capture is already
+      // handled by the ProsBuddy booking widget on /contact).
       {
         src: "https://widgets.leadconnectorhq.com/loader.js",
         "data-resources-url": "https://widgets.leadconnectorhq.com/chat-widget/loader.js",
@@ -165,24 +187,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
+          "@id": ORG_ID,
           name: "Best Sub-Zero & Viking Service",
-          telephone: "+1-888-702-8565",
-          email: "info@bestsubzerovikingservices.com",
+          url: absUrl("/"),
+          logo: absUrl("/images/logo.webp"),
+          telephone: "+1-619-975-4755",
+          email: "subzerovikingrepair.pro@gmail.com",
+          address: LOCAL_BUSINESS_ADDRESS,
+          openingHoursSpecification: LOCAL_BUSINESS_HOURS,
           areaServed: [
-            "Staten Island",
-            "Brooklyn",
-            "Queens",
-            "Long Island (near Queens)",
-            "Great Neck",
-            "Jersey City",
-            "Elizabeth NJ",
-            "North & Central New Jersey",
+            "San Diego",
+            "La Jolla",
+            "Pacific Beach",
+            "Coronado",
+            "Del Mar",
+            "Chula Vista",
+            "National City",
+            "North County San Diego",
           ],
-          sameAs: [
-            "https://instagram.com/best_subzero_viking_service",
-            "https://www.facebook.com/BSZVS",
-            "https://www.youtube.com/@bestsubzerovikingservice",
-          ],
+          sameAs: [],
         }),
       },
     ],
@@ -230,41 +253,53 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const router = useRouter();
-  const matches = useMatches();
-  const hideChrome = matches.some(
-    (m) => m.pathname.startsWith("/admin") || m.pathname.startsWith("/auth"),
-  );
+  const mainRef = useRef<HTMLElement>(null);
+  // Hidden while the page's top hero/banner block (every page's first
+  // <section>) is on screen, so it doesn't duplicate/overlap that section's
+  // own CTA — appears once the visitor scrolls past it.
+  const [showMobileCta, setShowMobileCta] = useState(false);
 
   useEffect(() => {
-    const { data: sub } = supabase.auth.onAuthStateChange((event) => {
-      if (event !== "SIGNED_IN" && event !== "SIGNED_OUT" && event !== "USER_UPDATED") return;
-      router.invalidate();
-      if (event !== "SIGNED_OUT") queryClient.invalidateQueries();
+    // Every page component renders one wrapping <div>, whose own first
+    // child is the actual hero/banner <section> — that inner element is
+    // the one to observe, not the wrapper (which spans the entire page).
+    const pageRoot = mainRef.current?.firstElementChild;
+    const hero = pageRoot?.firstElementChild ?? pageRoot;
+    if (!hero) {
+      setShowMobileCta(true);
+      return;
+    }
+    const observer = new IntersectionObserver(([entry]) => {
+      setShowMobileCta(!entry.isIntersecting);
     });
-    return () => sub.subscription.unsubscribe();
-  }, [router, queryClient]);
+    observer.observe(hero);
+    return () => observer.disconnect();
+    // Re-observe whenever the route changes — each page has its own hero element.
+  }, [router.state.location.pathname]);
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className={cn("flex min-h-screen flex-col", !hideChrome && "pb-20 md:pb-0")}>
-        {!hideChrome && <SiteHeader />}
-        <main className="flex-1">
+      <div className="flex min-h-screen flex-col pb-20 md:pb-0">
+        <SiteHeader />
+        <main ref={mainRef} className="flex-1">
           <Outlet />
         </main>
-        {!hideChrome && <SiteFooter />}
+        <SiteFooter />
       </div>
-      {!hideChrome && (
-        <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background p-3 shadow-[0_-4px_16px_rgba(0,0,0,0.1)] md:hidden">
-          <Link to="/contact">
-            <Button
-              size="lg"
-              className="w-full gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
-            >
-              <CalendarClock className="h-4 w-4" /> Request Service
-            </Button>
-          </Link>
-        </div>
-      )}
+      <div
+        className={`fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background p-3 shadow-[0_-4px_16px_rgba(0,0,0,0.1)] transition-transform duration-300 md:hidden ${
+          showMobileCta ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        <Link to="/contact">
+          <Button
+            size="lg"
+            className="w-full gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
+          >
+            <CalendarClock className="h-4 w-4" /> Request Service
+          </Button>
+        </Link>
+      </div>
       <Suspense fallback={null}>
         <Toaster position="top-right" richColors closeButton />
       </Suspense>
