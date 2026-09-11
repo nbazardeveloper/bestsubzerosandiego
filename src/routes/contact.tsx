@@ -24,7 +24,6 @@ const AREAS = [
   "National City",
   "North County San Diego",
 ];
-
 const BOOKING_URL = "https://api.prosbuddy.com/widget/bookings/san-diego-booking-best-sub-zero";
 
 export const Route = createFileRoute("/contact")({
