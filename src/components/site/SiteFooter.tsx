@@ -251,6 +251,18 @@ export function SiteFooter() {
       </div>
 
       <div className="border-t border-white/10">
+        <div className="mx-auto max-w-7xl px-4 py-5 md:px-8">
+          <a
+            href="https://patch.com/california/rancho-santa-fe-ca/business/listing/593937/best-sub-zero-viking-service?utm_source=badge&utm_medium=referral&utm_campaign=business_badge"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src="/images/patch-logo.svg" alt="Best Sub-Zero & Viking Service on Patch" className="h-6 w-auto" />
+          </a>
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
         <div className="mx-auto max-w-7xl px-4 py-5 text-xs text-primary-foreground/60 md:px-8">
           <span>
             © {year} Best Sub-Zero &amp; Viking Service. All rights reserved. Independent appliance
