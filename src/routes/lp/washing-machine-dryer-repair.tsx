@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Phone, CheckCircle2 } from "lucide-react";
+import { Phone, CheckCircle2, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
@@ -77,7 +77,6 @@ function WashingMachineDryerLanding() {
   const rating = settings?.review_rating;
 
   const trustPoints = [
-    "13+ years of hands-on experience",
     "Insured & certified technicians",
     "$95 diagnostic fee — waived when we complete the repair",
     rating ? `${rating.toFixed(1)}★ average rating` : null,
@@ -119,7 +118,16 @@ function WashingMachineDryerLanding() {
               Fast, honest repair for front-load and top-load washers and gas or electric dryers —
               Whirlpool, Maytag, GE, Bosch, Electrolux, Miele and more.
             </p>
-            <ul className="mt-6 space-y-2 text-sm">
+            <div className="mt-6 inline-flex w-fit items-center gap-3 rounded-lg border border-accent/30 bg-accent/5 px-4 py-3">
+              <div className="flex h-11 w-11 flex-shrink-0 items-center justify-center rounded-full bg-accent/15">
+                <Award className="h-6 w-6 text-accent" aria-hidden />
+              </div>
+              <div>
+                <p className="text-lg font-bold leading-none text-foreground">13+ Years</p>
+                <p className="mt-1 text-xs text-muted-foreground">of hands-on experience</p>
+              </div>
+            </div>
+            <ul className="mt-4 space-y-2 text-sm">
               {trustPoints.map((t) => (
                 <li key={t} className="flex items-center gap-2">
                   <CheckCircle2 className="h-4 w-4 flex-shrink-0 text-accent" aria-hidden /> {t}
