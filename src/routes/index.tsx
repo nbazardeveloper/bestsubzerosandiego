@@ -31,8 +31,8 @@ import { listFeaturedServices, listFeaturedProjects, getSiteSettings } from "@/l
 const ADVANTAGES = [
   {
     icon: YearsIcon,
-    title: "Proven Experience",
-    body: "Insured & certified technicians servicing Sub-Zero, Wolf & Viking appliances across San Diego.",
+    title: "13+ Years Experience",
+    body: "Insured & certified technicians with 13+ years servicing Sub-Zero, Wolf & Viking appliances across San Diego.",
   },
   {
     icon: DiagnosticsIcon,

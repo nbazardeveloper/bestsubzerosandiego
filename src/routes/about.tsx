@@ -70,9 +70,9 @@ function About() {
               Premium appliance repair, done <span className="text-accent">honestly</span>.
             </h1>
             <p className="mt-5 max-w-xl text-lg text-muted-foreground">
-              Founded to give homeowners honest, professional, long-lasting repair for premium
-              kitchen appliances — focused primarily on Sub-Zero, Viking and Wolf while also
-              servicing other high-end residential brands.
+              With 13+ years of hands-on experience, we give homeowners honest, professional,
+              long-lasting repair for premium kitchen appliances — focused primarily on Sub-Zero,
+              Viking and Wolf while also servicing other high-end residential brands.
             </p>
             <p className="mt-4 max-w-xl text-muted-foreground">
               Accurate diagnostics, transparent communication and quality workmanship — helping
