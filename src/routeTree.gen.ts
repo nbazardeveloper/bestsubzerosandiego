@@ -24,6 +24,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
 import { Route as ProjectsGalleryRouteImport } from './routes/projects_.gallery'
 import { Route as PostSlugRouteImport } from './routes/post.$slug'
+import { Route as LpWashingMachineDryerRepairRouteImport } from './routes/lp/washing-machine-dryer-repair'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -100,6 +101,12 @@ const PostSlugRoute = PostSlugRouteImport.update({
   path: '/post/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LpWashingMachineDryerRepairRoute =
+  LpWashingMachineDryerRepairRouteImport.update({
+    id: '/lp/washing-machine-dryer-repair',
+    path: '/lp/washing-machine-dryer-repair',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -114,6 +121,7 @@ export interface FileRoutesByFullPath {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
   '/projects/gallery': typeof ProjectsGalleryRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -131,6 +139,7 @@ export interface FileRoutesByTo {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
   '/projects/gallery': typeof ProjectsGalleryRoute
   '/services/$slug': typeof ServicesSlugRoute
@@ -149,6 +158,7 @@ export interface FileRoutesById {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
   '/projects_/gallery': typeof ProjectsGalleryRoute
   '/services_/$slug': typeof ServicesSlugRoute
@@ -168,6 +178,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
     | '/projects/gallery'
     | '/services/$slug'
@@ -185,6 +196,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
     | '/projects/gallery'
     | '/services/$slug'
@@ -202,6 +214,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
     | '/projects_/gallery'
     | '/services_/$slug'
@@ -220,6 +233,7 @@ export interface RootRouteChildren {
   ServiceAreaRoute: typeof ServiceAreaRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  LpWashingMachineDryerRepairRoute: typeof LpWashingMachineDryerRepairRoute
   PostSlugRoute: typeof PostSlugRoute
   ProjectsGalleryRoute: typeof ProjectsGalleryRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
@@ -332,6 +346,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lp/washing-machine-dryer-repair': {
+      id: '/lp/washing-machine-dryer-repair'
+      path: '/lp/washing-machine-dryer-repair'
+      fullPath: '/lp/washing-machine-dryer-repair'
+      preLoaderRoute: typeof LpWashingMachineDryerRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -348,6 +369,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServiceAreaRoute: ServiceAreaRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  LpWashingMachineDryerRepairRoute: LpWashingMachineDryerRepairRoute,
   PostSlugRoute: PostSlugRoute,
   ProjectsGalleryRoute: ProjectsGalleryRoute,
   ServicesSlugRoute: ServicesSlugRoute,

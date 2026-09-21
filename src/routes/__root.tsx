@@ -259,7 +259,14 @@ function RootComponent() {
   // own CTA — appears once the visitor scrolls past it.
   const [showMobileCta, setShowMobileCta] = useState(false);
 
+  // Standalone ad landing pages ("/lp/...") render outside the normal site
+  // chrome — no header nav, no footer, no site-wide sticky CTA bar — so paid
+  // traffic lands on a single-focus page with nothing to click but the
+  // page's own call-to-action. See src/routes/lp/ for these routes.
+  const isLandingPage = router.state.location.pathname.startsWith("/lp/");
+
   useEffect(() => {
+    if (isLandingPage) return;
     // Every page component renders one wrapping <div>, whose own first
     // child is the actual hero/banner <section> — that inner element is
     // the one to observe, not the wrapper (which spans the entire page).
@@ -275,7 +282,20 @@ function RootComponent() {
     observer.observe(hero);
     return () => observer.disconnect();
     // Re-observe whenever the route changes — each page has its own hero element.
-  }, [router.state.location.pathname]);
+  }, [router.state.location.pathname, isLandingPage]);
+
+  if (isLandingPage) {
+    return (
+      <QueryClientProvider client={queryClient}>
+        <main ref={mainRef}>
+          <Outlet />
+        </main>
+        <Suspense fallback={null}>
+          <Toaster position="top-right" richColors closeButton />
+        </Suspense>
+      </QueryClientProvider>
+    );
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
