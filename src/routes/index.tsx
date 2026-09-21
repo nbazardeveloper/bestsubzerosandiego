@@ -15,7 +15,6 @@ import { ReviewsBar } from "@/components/site/ReviewsBar";
 import { SpecialistBrandsBand } from "@/components/site/SpecialistBrandsBand";
 import { BrandsMarquee } from "@/components/site/BrandsMarquee";
 import { TestimonialCarousel } from "@/components/site/TestimonialCarousel";
-import { LazyYouTubeBackground } from "@/components/site/LazyYouTubeBackground";
 import { FinalCta } from "@/components/site/FinalCta";
 import { SITE_REVIEWS } from "@/lib/reviews-data";
 import {
@@ -367,8 +366,7 @@ function Home() {
         </div>
       </section>
 
-      {/* PROJECTS — gallery: a muted looping video reel up top, then a
-          hover-reveal photo grid below (image zooms, title/brand slides up
+      {/* PROJECTS — hover-reveal photo grid (image zooms, title/brand slides up
           over a dark gradient) instead of plain cards with text underneath. */}
       {projects.length > 0 ? (
         <section className="mx-auto max-w-7xl px-4 py-20 md:px-8">
@@ -389,13 +387,7 @@ function Home() {
             </Link>
           </div>
 
-          <LazyYouTubeBackground
-            videoId="t0z6O0nhGfY"
-            title="Best Sub-Zero & Viking Service — recent work"
-            className="relative mt-10 aspect-video overflow-hidden rounded-xl shadow-md"
-          />
-
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
             {projects.map((p) => (
               <Link
                 key={p.id}
