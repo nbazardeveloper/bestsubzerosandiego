@@ -229,6 +229,31 @@ export const services: Service[] = [
     sort_order: 11,
     created_at: now,
   },
+  {
+    id: "svc-12",
+    slug: "washing-machine-dryer-repair",
+    title: "Washing Machine & Dryer Repair",
+    brands: [
+      "Whirlpool",
+      "Maytag",
+      "GE",
+      "Kenmore",
+      "Bosch",
+      "Electrolux",
+      "Miele",
+      "Asko",
+      "Speed Queen",
+    ],
+    category: "Laundry",
+    short_description: "Repair for front-load and top-load washing machines and gas or electric dryers.",
+    description:
+      "We repair washing machines and dryers from Whirlpool, Maytag, GE, Kenmore, Bosch, Electrolux, Miele, Asko and Speed Queen. Common washer issues we resolve include units that won't drain or spin, leaks, door lock and latch failures, noisy bearings and control board faults. On dryers, we diagnose no-heat problems, worn drum belts, faulty thermal fuses and igniters, and vent and airflow issues. We do not service LG or Samsung laundry appliances.",
+    image_url: "/images/services/washing-machine-dryer-repair.webp",
+    is_published: true,
+    is_featured: false,
+    sort_order: 12,
+    created_at: now,
+  },
 ];
 
 type Project = {
