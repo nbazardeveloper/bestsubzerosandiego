@@ -153,6 +153,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PKFXGLNV');`,
       },
+      // Google Ads tag (AW-990368648) — defines gtag() so the "Click to
+      // call" conversion below can fire.
+      { src: "https://www.googletagmanager.com/gtag/js?id=AW-990368648", async: true },
+      {
+        children: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'AW-990368648');`,
+      },
+      // Google Ads "Click to call (3)" conversion. Fired for every tel: link
+      // on the site via one delegated listener, so header/footer/hero/CTA
+      // phone buttons are all covered without wiring each one. The timeout
+      // fallback makes sure the call still goes through if gtag.js is
+      // blocked (ad blockers) and event_callback never runs.
+      {
+        children: `function gtag_report_conversion(url) {
+  var done = false;
+  var callback = function () {
+    if (done) return;
+    done = true;
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-990368648/2w9fCJXnnIsdEIinn9gD',
+      'value': 1.0,
+      'currency': 'USD',
+      'event_callback': callback
+  });
+  setTimeout(callback, 1000);
+  return false;
+}
+document.addEventListener('click', function (e) {
+  var a = e.target && e.target.closest && e.target.closest('a[href^="tel:"]');
+  if (!a) return;
+  e.preventDefault();
+  gtag_report_conversion(a.getAttribute('href'));
+});`,
+      },
       // Microsoft Advertising UET (Universal Event Tracking) — lets
       // Microsoft Advertising see site visits and attribute conversions
       // (calls, form submissions, etc.) back to Bing/Microsoft Ads clicks.
