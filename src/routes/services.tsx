@@ -12,8 +12,12 @@ import { FinalCta } from "@/components/site/FinalCta";
 
 // Services that have a dedicated page — clicking anywhere on their card opens
 // it (other cards only have the "Request Service" button).
-const SERVICE_LANDING_PAGES: Record<string, "/lp/refrigerator-repair"> = {
+const SERVICE_LANDING_PAGES: Record<
+  string,
+  "/lp/refrigerator-repair" | "/lp/washing-machine-dryer-repair"
+> = {
   "refrigerator-freezer-repair": "/lp/refrigerator-repair",
+  "washing-machine-dryer-repair": "/lp/washing-machine-dryer-repair",
 };
 
 export const Route = createFileRoute("/services")({
