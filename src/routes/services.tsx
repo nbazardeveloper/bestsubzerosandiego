@@ -18,7 +18,9 @@ const SERVICE_LANDING_PAGES: Record<
   | "/lp/washing-machine-dryer-repair"
   | "/lp/oven-repair"
   | "/lp/range-stove-repair"
+  | "/lp/ice-maker-repair"
 > = {
+  "ice-maker-repair": "/lp/ice-maker-repair",
   "range-stove-repair": "/lp/range-stove-repair",
   "oven-repair": "/lp/oven-repair",
   "refrigerator-freezer-repair": "/lp/refrigerator-repair",

@@ -28,6 +28,7 @@ import { Route as LpWashingMachineDryerRepairRouteImport } from './routes/lp/was
 import { Route as LpRefrigeratorRepairRouteImport } from './routes/lp/refrigerator-repair'
 import { Route as LpRangeStoveRepairRouteImport } from './routes/lp/range-stove-repair'
 import { Route as LpOvenRepairRouteImport } from './routes/lp/oven-repair'
+import { Route as LpIceMakerRepairRouteImport } from './routes/lp/ice-maker-repair'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -125,6 +126,11 @@ const LpOvenRepairRoute = LpOvenRepairRouteImport.update({
   path: '/lp/oven-repair',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LpIceMakerRepairRoute = LpIceMakerRepairRouteImport.update({
+  id: '/lp/ice-maker-repair',
+  path: '/lp/ice-maker-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -139,6 +145,7 @@ export interface FileRoutesByFullPath {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
   '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
@@ -160,6 +167,7 @@ export interface FileRoutesByTo {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
   '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
@@ -182,6 +190,7 @@ export interface FileRoutesById {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
   '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
@@ -205,6 +214,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/ice-maker-repair'
     | '/lp/oven-repair'
     | '/lp/range-stove-repair'
     | '/lp/refrigerator-repair'
@@ -226,6 +236,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/ice-maker-repair'
     | '/lp/oven-repair'
     | '/lp/range-stove-repair'
     | '/lp/refrigerator-repair'
@@ -247,6 +258,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/ice-maker-repair'
     | '/lp/oven-repair'
     | '/lp/range-stove-repair'
     | '/lp/refrigerator-repair'
@@ -269,6 +281,7 @@ export interface RootRouteChildren {
   ServiceAreaRoute: typeof ServiceAreaRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  LpIceMakerRepairRoute: typeof LpIceMakerRepairRoute
   LpOvenRepairRoute: typeof LpOvenRepairRoute
   LpRangeStoveRepairRoute: typeof LpRangeStoveRepairRoute
   LpRefrigeratorRepairRoute: typeof LpRefrigeratorRepairRoute
@@ -413,6 +426,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LpOvenRepairRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lp/ice-maker-repair': {
+      id: '/lp/ice-maker-repair'
+      path: '/lp/ice-maker-repair'
+      fullPath: '/lp/ice-maker-repair'
+      preLoaderRoute: typeof LpIceMakerRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -429,6 +449,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServiceAreaRoute: ServiceAreaRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  LpIceMakerRepairRoute: LpIceMakerRepairRoute,
   LpOvenRepairRoute: LpOvenRepairRoute,
   LpRangeStoveRepairRoute: LpRangeStoveRepairRoute,
   LpRefrigeratorRepairRoute: LpRefrigeratorRepairRoute,
