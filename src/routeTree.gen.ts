@@ -25,6 +25,7 @@ import { Route as ServicesSlugRouteImport } from './routes/services_.$slug'
 import { Route as ProjectsGalleryRouteImport } from './routes/projects_.gallery'
 import { Route as PostSlugRouteImport } from './routes/post.$slug'
 import { Route as LpWashingMachineDryerRepairRouteImport } from './routes/lp/washing-machine-dryer-repair'
+import { Route as LpRefrigeratorRepairRouteImport } from './routes/lp/refrigerator-repair'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -107,6 +108,11 @@ const LpWashingMachineDryerRepairRoute =
     path: '/lp/washing-machine-dryer-repair',
     getParentRoute: () => rootRouteImport,
   } as any)
+const LpRefrigeratorRepairRoute = LpRefrigeratorRepairRouteImport.update({
+  id: '/lp/refrigerator-repair',
+  path: '/lp/refrigerator-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -121,6 +127,7 @@ export interface FileRoutesByFullPath {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
   '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
   '/projects/gallery': typeof ProjectsGalleryRoute
@@ -139,6 +146,7 @@ export interface FileRoutesByTo {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
   '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
   '/projects/gallery': typeof ProjectsGalleryRoute
@@ -158,6 +166,7 @@ export interface FileRoutesById {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
   '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
   '/projects_/gallery': typeof ProjectsGalleryRoute
@@ -178,6 +187,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/refrigerator-repair'
     | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
     | '/projects/gallery'
@@ -196,6 +206,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/refrigerator-repair'
     | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
     | '/projects/gallery'
@@ -214,6 +225,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/refrigerator-repair'
     | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
     | '/projects_/gallery'
@@ -233,6 +245,7 @@ export interface RootRouteChildren {
   ServiceAreaRoute: typeof ServiceAreaRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  LpRefrigeratorRepairRoute: typeof LpRefrigeratorRepairRoute
   LpWashingMachineDryerRepairRoute: typeof LpWashingMachineDryerRepairRoute
   PostSlugRoute: typeof PostSlugRoute
   ProjectsGalleryRoute: typeof ProjectsGalleryRoute
@@ -353,6 +366,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LpWashingMachineDryerRepairRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lp/refrigerator-repair': {
+      id: '/lp/refrigerator-repair'
+      path: '/lp/refrigerator-repair'
+      fullPath: '/lp/refrigerator-repair'
+      preLoaderRoute: typeof LpRefrigeratorRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -369,6 +389,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServiceAreaRoute: ServiceAreaRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  LpRefrigeratorRepairRoute: LpRefrigeratorRepairRoute,
   LpWashingMachineDryerRepairRoute: LpWashingMachineDryerRepairRoute,
   PostSlugRoute: PostSlugRoute,
   ProjectsGalleryRoute: ProjectsGalleryRoute,
