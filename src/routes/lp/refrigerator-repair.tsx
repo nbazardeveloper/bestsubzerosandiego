@@ -27,7 +27,6 @@ const BRANDS = [
   "Viking",
   "Thermador",
   "Miele",
-  "Liebherr",
   "Fisher & Paykel",
   "Dacor",
   "JennAir",
@@ -41,8 +40,6 @@ const BRANDS = [
   "Electrolux",
   "Maytag",
   "Kenmore",
-  "Samsung",
-  "LG",
   "Bertazzoni",
   "Marvel",
   "U-Line",
@@ -141,7 +138,7 @@ const FAQS = [
   },
   {
     q: "Which refrigerator brands do you repair?",
-    a: "All major brands — from built-in luxury units like Sub-Zero, Viking, Thermador, Miele and Liebherr to everyday brands like Whirlpool, GE, Samsung, LG, Frigidaire and KitchenAid.",
+    a: "Most major brands — from built-in luxury units like Sub-Zero, Viking, Thermador and Miele to everyday brands like Whirlpool, GE, Frigidaire and KitchenAid. We do not service LG, Samsung or Liebherr refrigerators.",
   },
   {
     q: "Is it worth repairing my refrigerator or should I replace it?",
@@ -174,9 +171,9 @@ const AREAS = [
 // this service), and this page exists to match ad copy, not to rank.
 export const Route = createFileRoute("/lp/refrigerator-repair")({
   head: () => {
-    const title = "Refrigerator Repair San Diego — All Brands | Same-Day Service";
+    const title = "Refrigerator Repair San Diego | Same-Day Service";
     const description =
-      "13+ years repairing refrigerators of all brands in San Diego — Sub-Zero, Viking, Thermador, Samsung, LG, GE, Whirlpool & more. $95 diagnostic, waived on repair. Call now.";
+      "13+ years repairing refrigerators in San Diego — Sub-Zero, Viking, Thermador, GE, Whirlpool & more. $95 diagnostic, waived on repair. Call now.";
     const image = absUrl("/images/services/refrigerator-freezer-repair.webp");
     return {
       meta: [
@@ -235,7 +232,7 @@ function RefrigeratorRepairLanding() {
               San Diego · Same-day service available
             </span>
             <h1 className="mt-4 text-4xl font-semibold tracking-tight md:text-5xl">
-              Refrigerator Repair — <span className="text-accent">All Brands</span>
+              Refrigerator <span className="text-accent">Repair</span>
             </h1>
             <p className="mt-4 text-lg text-muted-foreground">
               Fast, honest repair for built-in, French door, side-by-side, top- and bottom-freezer
@@ -330,7 +327,7 @@ function RefrigeratorRepairLanding() {
       {/* BRANDS */}
       <section className="mx-auto max-w-5xl px-4 py-10 md:px-8">
         <p className="text-center text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-          All brands we service
+          Brands we service
         </p>
         <div className="mt-4 flex flex-wrap justify-center gap-2">
           {BRANDS.map((b) => (
@@ -340,7 +337,7 @@ function RefrigeratorRepairLanding() {
           ))}
         </div>
         <p className="mx-auto mt-4 max-w-lg text-center text-xs text-muted-foreground">
-          Don't see your brand? Call us — we repair virtually every refrigerator make and model.
+          We do not service LG, Samsung or Liebherr refrigerators.
         </p>
       </section>
 

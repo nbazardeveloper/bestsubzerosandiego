@@ -10,6 +10,12 @@ import { listServices } from "@/lib/site.functions";
 import { getServiceIcon, getServiceCategoryIconClassName } from "@/lib/service-category-icons";
 import { FinalCta } from "@/components/site/FinalCta";
 
+// Services that have a dedicated page — clicking anywhere on their card opens
+// it (other cards only have the "Request Service" button).
+const SERVICE_LANDING_PAGES: Record<string, "/lp/refrigerator-repair"> = {
+  "refrigerator-freezer-repair": "/lp/refrigerator-repair",
+};
+
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
@@ -67,11 +73,6 @@ function ServicesPage() {
             high-end brands including Thermador, Bosch, Dacor, GE Monogram, Bertazzoni and Blue
             Star.
           </p>
-          <p className="mt-3 max-w-2xl text-sm text-muted-foreground">
-            We do not service LG, Samsung or Liebherr refrigerators, and we do not repair
-            dishwashers. We provide repair and maintenance only — we do not perform new appliance
-            installations.
-          </p>
         </div>
       </section>
 
@@ -128,11 +129,21 @@ function ServicesPage() {
         <div className="mt-10 grid gap-x-6 gap-y-10 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((s) => {
             const CategoryIcon = getServiceIcon(s);
+            const landingHref = SERVICE_LANDING_PAGES[s.slug];
             return (
               <div
                 key={s.id}
-                className="relative flex flex-col rounded-lg border border-border bg-card"
+                className={`relative flex flex-col rounded-lg border border-border bg-card${
+                  landingHref
+                    ? " transition-all hover:-translate-y-1 hover:border-accent/50 hover:shadow-lg"
+                    : ""
+                }`}
               >
+                {landingHref ? (
+                  <Link to={landingHref} className="absolute inset-0 z-10 rounded-lg">
+                    <span className="sr-only">{s.title}</span>
+                  </Link>
+                ) : null}
                 <div className="relative">
                   <ImagePlaceholder
                     aspect="square"
@@ -165,7 +176,7 @@ function ServicesPage() {
                 </div>
                 <Link
                   to="/contact"
-                  className="absolute -bottom-5 left-6 inline-flex items-center justify-center rounded-md bg-accent px-5 py-2.5 font-display text-sm font-bold text-accent-foreground shadow-sm transition-colors hover:bg-accent/90"
+                  className="absolute -bottom-5 left-6 z-20 inline-flex items-center justify-center rounded-md bg-accent px-5 py-2.5 font-display text-sm font-bold text-accent-foreground shadow-sm transition-colors hover:bg-accent/90"
                 >
                   Request Service
                 </Link>
@@ -176,6 +187,10 @@ function ServicesPage() {
             <p className="text-sm text-muted-foreground">No services match the current filters.</p>
           ) : null}
         </div>
+
+        <p className="mt-16 text-center text-sm text-muted-foreground">
+          We provide repair and maintenance only — we do not perform new appliance installations.
+        </p>
       </section>
 
       <FinalCta />
