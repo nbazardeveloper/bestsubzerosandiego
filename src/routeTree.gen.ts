@@ -26,6 +26,7 @@ import { Route as ProjectsGalleryRouteImport } from './routes/projects_.gallery'
 import { Route as PostSlugRouteImport } from './routes/post.$slug'
 import { Route as LpWashingMachineDryerRepairRouteImport } from './routes/lp/washing-machine-dryer-repair'
 import { Route as LpRefrigeratorRepairRouteImport } from './routes/lp/refrigerator-repair'
+import { Route as LpRangeStoveRepairRouteImport } from './routes/lp/range-stove-repair'
 import { Route as LpOvenRepairRouteImport } from './routes/lp/oven-repair'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -114,6 +115,11 @@ const LpRefrigeratorRepairRoute = LpRefrigeratorRepairRouteImport.update({
   path: '/lp/refrigerator-repair',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LpRangeStoveRepairRoute = LpRangeStoveRepairRouteImport.update({
+  id: '/lp/range-stove-repair',
+  path: '/lp/range-stove-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LpOvenRepairRoute = LpOvenRepairRouteImport.update({
   id: '/lp/oven-repair',
   path: '/lp/oven-repair',
@@ -134,6 +140,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
+  '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
   '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
   '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
+  '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
   '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
   '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
+  '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
   '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
   '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
@@ -197,6 +206,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/lp/oven-repair'
+    | '/lp/range-stove-repair'
     | '/lp/refrigerator-repair'
     | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
@@ -217,6 +227,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/lp/oven-repair'
+    | '/lp/range-stove-repair'
     | '/lp/refrigerator-repair'
     | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
@@ -237,6 +248,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/lp/oven-repair'
+    | '/lp/range-stove-repair'
     | '/lp/refrigerator-repair'
     | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
@@ -258,6 +270,7 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   LpOvenRepairRoute: typeof LpOvenRepairRoute
+  LpRangeStoveRepairRoute: typeof LpRangeStoveRepairRoute
   LpRefrigeratorRepairRoute: typeof LpRefrigeratorRepairRoute
   LpWashingMachineDryerRepairRoute: typeof LpWashingMachineDryerRepairRoute
   PostSlugRoute: typeof PostSlugRoute
@@ -386,6 +399,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LpRefrigeratorRepairRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lp/range-stove-repair': {
+      id: '/lp/range-stove-repair'
+      path: '/lp/range-stove-repair'
+      fullPath: '/lp/range-stove-repair'
+      preLoaderRoute: typeof LpRangeStoveRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lp/oven-repair': {
       id: '/lp/oven-repair'
       path: '/lp/oven-repair'
@@ -410,6 +430,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   LpOvenRepairRoute: LpOvenRepairRoute,
+  LpRangeStoveRepairRoute: LpRangeStoveRepairRoute,
   LpRefrigeratorRepairRoute: LpRefrigeratorRepairRoute,
   LpWashingMachineDryerRepairRoute: LpWashingMachineDryerRepairRoute,
   PostSlugRoute: PostSlugRoute,

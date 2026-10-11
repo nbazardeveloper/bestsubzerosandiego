@@ -130,7 +130,7 @@ const FAQS = [
   },
   {
     q: "Do you repair both gas and electric ovens?",
-    a: "Yes — gas and electric wall ovens, double ovens, convection and steam ovens, and the oven section of ranges.",
+    a: "Yes — gas oven repair and electric oven repair for wall ovens, double ovens, convection and steam ovens, and the oven section of ranges.",
   },
 ];
 
