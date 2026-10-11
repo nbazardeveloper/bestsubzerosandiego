@@ -14,8 +14,9 @@ import { FinalCta } from "@/components/site/FinalCta";
 // it (other cards only have the "Request Service" button).
 const SERVICE_LANDING_PAGES: Record<
   string,
-  "/lp/refrigerator-repair" | "/lp/washing-machine-dryer-repair"
+  "/lp/refrigerator-repair" | "/lp/washing-machine-dryer-repair" | "/lp/oven-repair"
 > = {
+  "oven-repair": "/lp/oven-repair",
   "refrigerator-freezer-repair": "/lp/refrigerator-repair",
   "washing-machine-dryer-repair": "/lp/washing-machine-dryer-repair",
 };

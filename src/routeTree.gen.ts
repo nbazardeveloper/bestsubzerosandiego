@@ -26,6 +26,7 @@ import { Route as ProjectsGalleryRouteImport } from './routes/projects_.gallery'
 import { Route as PostSlugRouteImport } from './routes/post.$slug'
 import { Route as LpWashingMachineDryerRepairRouteImport } from './routes/lp/washing-machine-dryer-repair'
 import { Route as LpRefrigeratorRepairRouteImport } from './routes/lp/refrigerator-repair'
+import { Route as LpOvenRepairRouteImport } from './routes/lp/oven-repair'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -113,6 +114,11 @@ const LpRefrigeratorRepairRoute = LpRefrigeratorRepairRouteImport.update({
   path: '/lp/refrigerator-repair',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LpOvenRepairRoute = LpOvenRepairRouteImport.update({
+  id: '/lp/oven-repair',
+  path: '/lp/oven-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -127,6 +133,7 @@ export interface FileRoutesByFullPath {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
   '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
@@ -146,6 +153,7 @@ export interface FileRoutesByTo {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
   '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
@@ -166,6 +174,7 @@ export interface FileRoutesById {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/refrigerator-repair': typeof LpRefrigeratorRepairRoute
   '/lp/washing-machine-dryer-repair': typeof LpWashingMachineDryerRepairRoute
   '/post/$slug': typeof PostSlugRoute
@@ -187,6 +196,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/oven-repair'
     | '/lp/refrigerator-repair'
     | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
@@ -206,6 +216,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/oven-repair'
     | '/lp/refrigerator-repair'
     | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
@@ -225,6 +236,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/oven-repair'
     | '/lp/refrigerator-repair'
     | '/lp/washing-machine-dryer-repair'
     | '/post/$slug'
@@ -245,6 +257,7 @@ export interface RootRouteChildren {
   ServiceAreaRoute: typeof ServiceAreaRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  LpOvenRepairRoute: typeof LpOvenRepairRoute
   LpRefrigeratorRepairRoute: typeof LpRefrigeratorRepairRoute
   LpWashingMachineDryerRepairRoute: typeof LpWashingMachineDryerRepairRoute
   PostSlugRoute: typeof PostSlugRoute
@@ -373,6 +386,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LpRefrigeratorRepairRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lp/oven-repair': {
+      id: '/lp/oven-repair'
+      path: '/lp/oven-repair'
+      fullPath: '/lp/oven-repair'
+      preLoaderRoute: typeof LpOvenRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -389,6 +409,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServiceAreaRoute: ServiceAreaRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  LpOvenRepairRoute: LpOvenRepairRoute,
   LpRefrigeratorRepairRoute: LpRefrigeratorRepairRoute,
   LpWashingMachineDryerRepairRoute: LpWashingMachineDryerRepairRoute,
   PostSlugRoute: PostSlugRoute,
