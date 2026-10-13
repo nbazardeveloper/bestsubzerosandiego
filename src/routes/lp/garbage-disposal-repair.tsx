@@ -160,7 +160,7 @@ export const Route = createFileRoute("/lp/garbage-disposal-repair")({
     const title = "Garbage Disposal Repair San Diego | InSinkErator & More | Same-Day";
     const description =
       "Garbage disposal repair in San Diego — jammed, humming, leaking or won't turn on. InSinkErator, Waste King, Moen & KitchenAid. $95 diagnostic, waived on repair.";
-    const image = absUrl("/images/services/garbage-disposal-repair.webp");
+    const image = absUrl("/images/services/garbage-disposal-repair-v2.webp");
     return {
       meta: [
         { title },
@@ -281,7 +281,7 @@ function GarbageDisposalRepairLanding() {
           <ImagePlaceholder
             aspect="video"
             label="Garbage Disposal Repair"
-            src="/images/services/garbage-disposal-repair.webp"
+            src="/images/services/garbage-disposal-repair-v2.webp"
             alt="Garbage disposal repair in San Diego"
             priority
           />

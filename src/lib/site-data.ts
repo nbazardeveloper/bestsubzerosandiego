@@ -289,7 +289,7 @@ export const services: Service[] = [
     short_description: "Repair and replacement for jammed, leaking or humming garbage disposals.",
     description:
       "We repair garbage disposals from InSinkErator, Waste King, Moen and KitchenAid — jammed or humming units, disposals that won't turn on, tripped reset switches, leaks at the sink flange or drain connections, and worn or seized motors. If a disposal can't be repaired economically, we'll tell you upfront.",
-    image_url: "/images/services/garbage-disposal-repair.webp",
+    image_url: "/images/services/garbage-disposal-repair-v2.webp",
     is_published: true,
     is_featured: false,
     sort_order: 14,
