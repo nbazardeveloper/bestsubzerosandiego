@@ -34,7 +34,7 @@ export const Route = createFileRoute("/services")({
       {
         name: "description",
         content:
-          "Refrigerator, range, oven, cooktop, wine cooler, ice maker and ventilation repair for Sub-Zero, Viking, Wolf, Thermador and other premium brands in San Diego.",
+          "Sub-Zero, Viking and Wolf specialists in San Diego — refrigerator, range, oven, cooktop and wine cooler repair, plus washer, dryer, dishwasher, microwave, range hood and garbage disposal repair.",
       },
       { property: "og:title", content: "Premium Appliance Repair Services" },
       { property: "og:description", content: "All services we offer across San Diego." },
@@ -83,6 +83,10 @@ function ServicesPage() {
             Wolf — across ranges, stoves, cooktops, ovens and refrigeration. We also service other
             high-end brands including Thermador, Bosch, Dacor, GE Monogram, Bertazzoni and Blue
             Star.
+          </p>
+          <p className="mt-3 max-w-2xl text-muted-foreground">
+            Alongside our high-end specialty, we also repair everyday home appliances — washers,
+            dryers, dishwashers, built-in microwaves, range hoods and garbage disposals.
           </p>
         </div>
       </section>

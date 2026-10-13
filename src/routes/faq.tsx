@@ -27,11 +27,11 @@ const FAQ = [
   },
   {
     q: "Which brands do you service?",
-    a: "We specialize in Sub-Zero, Viking and Wolf — across ranges, stoves, cooktops, ovens and refrigeration. We also service other premium residential brands including Thermador, Bosch, Dacor, GE Monogram, Bertazzoni and Blue Star. For washing machines and dryers, we service Whirlpool, Maytag, GE, Kenmore, Bosch, Electrolux, Miele, Asko and Speed Queen.",
+    a: "We specialize in Sub-Zero, Viking and Wolf — across ranges, stoves, cooktops, ovens and refrigeration. We also service other premium residential brands including Thermador, Bosch, Dacor, GE Monogram, Bertazzoni and Blue Star. Beyond our high-end specialty, we also repair washers and dryers (Whirlpool, Maytag, GE, Kenmore, Bosch, Electrolux, Miele, Asko, Speed Queen), dishwashers (Bosch, Miele, Thermador, Cove, KitchenAid, Whirlpool, GE, Fisher & Paykel, Asko), built-in microwaves, range hoods and garbage disposals (InSinkErator, Waste King, Moen, KitchenAid).",
   },
   {
     q: "Which appliances or brands do you NOT service?",
-    a: "We do not service LG, Samsung or Liebherr refrigerators, and we do not repair dishwashers. We also do not service LG or Samsung washing machines or dryers. Our focus is premium residential kitchen appliances, high-end refrigeration, and washing machine and dryer repair.",
+    a: "We do not service LG, Samsung or Liebherr refrigerators, and we do not service LG or Samsung washing machines or dryers. Our focus is premium residential kitchen appliances and high-end refrigeration, and we also repair washers, dryers, dishwashers, built-in microwaves, range hoods and garbage disposals.",
   },
   {
     q: "Do you install new appliances?",

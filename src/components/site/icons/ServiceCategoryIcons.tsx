@@ -13,4 +13,6 @@ export {
   Snowflake as IceMakerIcon,
   Wine as WineCoolerIcon,
   FlameKindling as BbqIcon,
+  Droplets as DishwasherIcon,
+  Recycle as DisposalIcon,
 } from "lucide-react";

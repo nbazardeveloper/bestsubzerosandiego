@@ -10,6 +10,8 @@ import {
   IceMakerIcon,
   WineCoolerIcon,
   BbqIcon,
+  DishwasherIcon,
+  DisposalIcon,
 } from "@/components/site/icons/ServiceCategoryIcons";
 
 type CategoryIcon = ComponentType<SVGProps<SVGSVGElement>>;
@@ -22,6 +24,7 @@ export const SERVICE_CATEGORY_ICONS: Record<string, CategoryIcon> = {
   Ventilation: RangeHoodIcon,
   Outdoor: BbqIcon,
   Maintenance: MaintenanceIcon,
+  "Kitchen Cleanup": DishwasherIcon,
 };
 
 // Per-service overrides, keyed by the service's `slug` (see site-data.ts's
@@ -38,6 +41,8 @@ export const SERVICE_SLUG_ICONS: Record<string, CategoryIcon> = {
   "outdoor-kitchen-bbq-repair": BbqIcon,
   "microwave-repair": MicrowaveIcon,
   "preventive-maintenance": MaintenanceIcon,
+  "dishwasher-repair": DishwasherIcon,
+  "garbage-disposal-repair": DisposalIcon,
 };
 
 export function getServiceCategoryIcon(category: string): CategoryIcon {
