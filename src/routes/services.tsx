@@ -19,7 +19,9 @@ const SERVICE_LANDING_PAGES: Record<
   | "/lp/oven-repair"
   | "/lp/range-stove-repair"
   | "/lp/ice-maker-repair"
+  | "/lp/dishwasher-repair"
 > = {
+  "dishwasher-repair": "/lp/dishwasher-repair",
   "ice-maker-repair": "/lp/ice-maker-repair",
   "range-stove-repair": "/lp/range-stove-repair",
   "oven-repair": "/lp/oven-repair",

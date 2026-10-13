@@ -29,6 +29,7 @@ import { Route as LpRefrigeratorRepairRouteImport } from './routes/lp/refrigerat
 import { Route as LpRangeStoveRepairRouteImport } from './routes/lp/range-stove-repair'
 import { Route as LpOvenRepairRouteImport } from './routes/lp/oven-repair'
 import { Route as LpIceMakerRepairRouteImport } from './routes/lp/ice-maker-repair'
+import { Route as LpDishwasherRepairRouteImport } from './routes/lp/dishwasher-repair'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
@@ -131,6 +132,11 @@ const LpIceMakerRepairRoute = LpIceMakerRepairRouteImport.update({
   path: '/lp/ice-maker-repair',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LpDishwasherRepairRoute = LpDishwasherRepairRouteImport.update({
+  id: '/lp/dishwasher-repair',
+  path: '/lp/dishwasher-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -145,6 +151,7 @@ export interface FileRoutesByFullPath {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/dishwasher-repair': typeof LpDishwasherRepairRoute
   '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
@@ -167,6 +174,7 @@ export interface FileRoutesByTo {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/dishwasher-repair': typeof LpDishwasherRepairRoute
   '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
@@ -190,6 +198,7 @@ export interface FileRoutesById {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/lp/dishwasher-repair': typeof LpDishwasherRepairRoute
   '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
@@ -214,6 +223,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/dishwasher-repair'
     | '/lp/ice-maker-repair'
     | '/lp/oven-repair'
     | '/lp/range-stove-repair'
@@ -236,6 +246,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/dishwasher-repair'
     | '/lp/ice-maker-repair'
     | '/lp/oven-repair'
     | '/lp/range-stove-repair'
@@ -258,6 +269,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/lp/dishwasher-repair'
     | '/lp/ice-maker-repair'
     | '/lp/oven-repair'
     | '/lp/range-stove-repair'
@@ -281,6 +293,7 @@ export interface RootRouteChildren {
   ServiceAreaRoute: typeof ServiceAreaRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  LpDishwasherRepairRoute: typeof LpDishwasherRepairRoute
   LpIceMakerRepairRoute: typeof LpIceMakerRepairRoute
   LpOvenRepairRoute: typeof LpOvenRepairRoute
   LpRangeStoveRepairRoute: typeof LpRangeStoveRepairRoute
@@ -433,6 +446,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LpIceMakerRepairRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lp/dishwasher-repair': {
+      id: '/lp/dishwasher-repair'
+      path: '/lp/dishwasher-repair'
+      fullPath: '/lp/dishwasher-repair'
+      preLoaderRoute: typeof LpDishwasherRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -449,6 +469,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServiceAreaRoute: ServiceAreaRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  LpDishwasherRepairRoute: LpDishwasherRepairRoute,
   LpIceMakerRepairRoute: LpIceMakerRepairRoute,
   LpOvenRepairRoute: LpOvenRepairRoute,
   LpRangeStoveRepairRoute: LpRangeStoveRepairRoute,
