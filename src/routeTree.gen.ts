@@ -29,6 +29,7 @@ import { Route as LpRefrigeratorRepairRouteImport } from './routes/lp/refrigerat
 import { Route as LpRangeStoveRepairRouteImport } from './routes/lp/range-stove-repair'
 import { Route as LpOvenRepairRouteImport } from './routes/lp/oven-repair'
 import { Route as LpIceMakerRepairRouteImport } from './routes/lp/ice-maker-repair'
+import { Route as LpGarbageDisposalRepairRouteImport } from './routes/lp/garbage-disposal-repair'
 import { Route as LpDishwasherRepairRouteImport } from './routes/lp/dishwasher-repair'
 
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -132,6 +133,11 @@ const LpIceMakerRepairRoute = LpIceMakerRepairRouteImport.update({
   path: '/lp/ice-maker-repair',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LpGarbageDisposalRepairRoute = LpGarbageDisposalRepairRouteImport.update({
+  id: '/lp/garbage-disposal-repair',
+  path: '/lp/garbage-disposal-repair',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LpDishwasherRepairRoute = LpDishwasherRepairRouteImport.update({
   id: '/lp/dishwasher-repair',
   path: '/lp/dishwasher-repair',
@@ -152,6 +158,7 @@ export interface FileRoutesByFullPath {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lp/dishwasher-repair': typeof LpDishwasherRepairRoute
+  '/lp/garbage-disposal-repair': typeof LpGarbageDisposalRepairRoute
   '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
@@ -175,6 +182,7 @@ export interface FileRoutesByTo {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lp/dishwasher-repair': typeof LpDishwasherRepairRoute
+  '/lp/garbage-disposal-repair': typeof LpGarbageDisposalRepairRoute
   '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
@@ -199,6 +207,7 @@ export interface FileRoutesById {
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/lp/dishwasher-repair': typeof LpDishwasherRepairRoute
+  '/lp/garbage-disposal-repair': typeof LpGarbageDisposalRepairRoute
   '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
   '/lp/oven-repair': typeof LpOvenRepairRoute
   '/lp/range-stove-repair': typeof LpRangeStoveRepairRoute
@@ -224,6 +233,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/lp/dishwasher-repair'
+    | '/lp/garbage-disposal-repair'
     | '/lp/ice-maker-repair'
     | '/lp/oven-repair'
     | '/lp/range-stove-repair'
@@ -247,6 +257,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/lp/dishwasher-repair'
+    | '/lp/garbage-disposal-repair'
     | '/lp/ice-maker-repair'
     | '/lp/oven-repair'
     | '/lp/range-stove-repair'
@@ -270,6 +281,7 @@ export interface FileRouteTypes {
     | '/services'
     | '/sitemap.xml'
     | '/lp/dishwasher-repair'
+    | '/lp/garbage-disposal-repair'
     | '/lp/ice-maker-repair'
     | '/lp/oven-repair'
     | '/lp/range-stove-repair'
@@ -294,6 +306,7 @@ export interface RootRouteChildren {
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   LpDishwasherRepairRoute: typeof LpDishwasherRepairRoute
+  LpGarbageDisposalRepairRoute: typeof LpGarbageDisposalRepairRoute
   LpIceMakerRepairRoute: typeof LpIceMakerRepairRoute
   LpOvenRepairRoute: typeof LpOvenRepairRoute
   LpRangeStoveRepairRoute: typeof LpRangeStoveRepairRoute
@@ -446,6 +459,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LpIceMakerRepairRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/lp/garbage-disposal-repair': {
+      id: '/lp/garbage-disposal-repair'
+      path: '/lp/garbage-disposal-repair'
+      fullPath: '/lp/garbage-disposal-repair'
+      preLoaderRoute: typeof LpGarbageDisposalRepairRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lp/dishwasher-repair': {
       id: '/lp/dishwasher-repair'
       path: '/lp/dishwasher-repair'
@@ -470,6 +490,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   LpDishwasherRepairRoute: LpDishwasherRepairRoute,
+  LpGarbageDisposalRepairRoute: LpGarbageDisposalRepairRoute,
   LpIceMakerRepairRoute: LpIceMakerRepairRoute,
   LpOvenRepairRoute: LpOvenRepairRoute,
   LpRangeStoveRepairRoute: LpRangeStoveRepairRoute,

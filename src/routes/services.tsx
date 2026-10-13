@@ -20,7 +20,9 @@ const SERVICE_LANDING_PAGES: Record<
   | "/lp/range-stove-repair"
   | "/lp/ice-maker-repair"
   | "/lp/dishwasher-repair"
+  | "/lp/garbage-disposal-repair"
 > = {
+  "garbage-disposal-repair": "/lp/garbage-disposal-repair",
   "dishwasher-repair": "/lp/dishwasher-repair",
   "ice-maker-repair": "/lp/ice-maker-repair",
   "range-stove-repair": "/lp/range-stove-repair",
