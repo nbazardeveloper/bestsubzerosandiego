@@ -9,12 +9,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { DisposalIcon } from "@/components/site/icons/ServiceCategoryIcons";
+import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { GuaranteeBadge } from "@/components/site/GuaranteeBadge";
 import { TestimonialCarousel } from "@/components/site/TestimonialCarousel";
 import { SITE_REVIEWS } from "@/lib/reviews-data";
 import { getSiteSettings } from "@/lib/site.functions";
-import { absUrl, DEFAULT_OG_IMAGE, twitterMeta } from "@/lib/seo";
+import { absUrl, twitterMeta } from "@/lib/seo";
 import {
   DiagnosticsIcon,
   PricingIcon,
@@ -160,8 +160,7 @@ export const Route = createFileRoute("/lp/garbage-disposal-repair")({
     const title = "Garbage Disposal Repair San Diego | InSinkErator & More | Same-Day";
     const description =
       "Garbage disposal repair in San Diego — jammed, humming, leaking or won't turn on. InSinkErator, Waste King, Moen & KitchenAid. $95 diagnostic, waived on repair.";
-    // No garbage disposal photo yet — falls back to the site-wide OG image.
-    const image = DEFAULT_OG_IMAGE;
+    const image = absUrl("/images/services/garbage-disposal-repair.webp");
     return {
       meta: [
         { title },
@@ -279,28 +278,13 @@ function GarbageDisposalRepairLanding() {
               No obligation — same-day response, most repairs finished in one visit.
             </p>
           </div>
-          {/* No garbage disposal photo yet — a quick symptom checklist fills
-              the hero's right column instead of an empty image placeholder. */}
-          <div className="self-start rounded-lg border border-border bg-card p-6 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-accent/15">
-                <DisposalIcon className="h-6 w-6 text-accent" aria-hidden />
-              </div>
-              <p className="text-lg font-semibold">Sound familiar?</p>
-            </div>
-            <ul className="mt-5 space-y-3 text-sm">
-              {SYMPTOM_FIXES.slice(0, 4).map((f) => (
-                <li key={f} className="flex items-start gap-2">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" aria-hidden />{" "}
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 border-t border-border pt-4 text-xs text-muted-foreground">
-              Turn off the power to the disposal and keep hands out of the unit — we'll take it from
-              there.
-            </p>
-          </div>
+          <ImagePlaceholder
+            aspect="video"
+            label="Garbage Disposal Repair"
+            src="/images/services/garbage-disposal-repair.webp"
+            alt="Garbage disposal repair in San Diego"
+            priority
+          />
         </div>
       </section>
 

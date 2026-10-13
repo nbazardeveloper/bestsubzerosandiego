@@ -274,7 +274,7 @@ export const services: Service[] = [
       "Repair for built-in and panel-ready dishwashers that won't drain, clean or start.",
     description:
       "We repair built-in, panel-ready and drawer dishwashers from Bosch, Miele, Thermador, Cove, KitchenAid, Whirlpool, GE, Fisher & Paykel and Asko. Common issues we resolve include dishwashers that won't drain, leaks, poor cleaning or drying, error codes, door latch failures, and faulty pumps, water inlet valves, heating elements and control boards.",
-    image_url: null,
+    image_url: "/images/services/dishwasher-repair.webp",
     is_published: true,
     is_featured: false,
     sort_order: 13,
@@ -289,7 +289,7 @@ export const services: Service[] = [
     short_description: "Repair and replacement for jammed, leaking or humming garbage disposals.",
     description:
       "We repair garbage disposals from InSinkErator, Waste King, Moen and KitchenAid — jammed or humming units, disposals that won't turn on, tripped reset switches, leaks at the sink flange or drain connections, and worn or seized motors. If a disposal can't be repaired economically, we'll tell you upfront.",
-    image_url: null,
+    image_url: "/images/services/garbage-disposal-repair.webp",
     is_published: true,
     is_featured: false,
     sort_order: 14,

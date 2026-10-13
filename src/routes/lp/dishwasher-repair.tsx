@@ -166,9 +166,7 @@ export const Route = createFileRoute("/lp/dishwasher-repair")({
     const title = "Dishwasher Repair San Diego | Bosch, Miele, Thermador & More | Same-Day";
     const description =
       "Dishwasher repair in San Diego — 13+ years with Bosch, Miele, Thermador, Cove, KitchenAid & more. Won't drain, leaking or not cleaning? $95 diagnostic, waived on repair.";
-    // No dishwasher-specific photo yet — this shared appliance lineup
-    // (used on the homepage FAQ section) includes a dishwasher.
-    const image = absUrl("/images/hero-FAQ.webp");
+    const image = absUrl("/images/services/dishwasher-repair.webp");
     return {
       meta: [
         { title },
@@ -290,8 +288,8 @@ function DishwasherRepairLanding() {
           <ImagePlaceholder
             aspect="video"
             label="Dishwasher Repair"
-            src="/images/hero-FAQ.webp"
-            alt="Stainless steel dishwasher alongside other kitchen appliances"
+            src="/images/services/dishwasher-repair.webp"
+            alt="Dishwasher repair in San Diego"
             priority
           />
         </div>
