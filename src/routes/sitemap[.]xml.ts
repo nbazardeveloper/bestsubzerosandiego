@@ -4,7 +4,7 @@ import { services, blogPosts } from "@/lib/site-data";
 
 // Sitemap URLs must be absolute per the sitemap protocol. Falls back to the
 // production domain if SITE_URL isn't set in the environment.
-const BASE_URL = process.env.SITE_URL || "https://subzerovikingrepairpro.com";
+const BASE_URL = process.env.SITE_URL || "https://subzerovikingrepair.pro";
 
 const STATIC_ROUTES = [
   { path: "/", priority: "1.0", changefreq: "weekly" as const },

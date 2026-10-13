@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://subzerovikingrepairpro.com/sitemap.xml
+Sitemap: https://subzerovikingrepair.pro/sitemap.xml

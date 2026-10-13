@@ -4,7 +4,7 @@
 // (DB-driven) content such as individual service pages.
 
 const SITE_NAME = "Best Sub-Zero & Viking Service";
-const SITE_URL = "https://subzerovikingrepairpro.com";
+const SITE_URL = "https://subzerovikingrepair.pro";
 
 /**
  * Turns a site-relative path into an absolute URL. Canonical links and

@@ -130,12 +130,12 @@ export const Route = createFileRoute("/")({
         { property: "og:url", content: absUrl("/") },
         {
           property: "og:image",
-          content: "https://subzerovikingrepairpro.com/images/hero.webp",
+          content: "https://subzerovikingrepair.pro/images/hero.webp",
         },
         ...twitterMeta(
           "Best Sub-Zero & Viking Service",
           "Honest, expert repair of premium residential kitchen appliances across San Diego.",
-          "https://subzerovikingrepairpro.com/images/hero.webp",
+          "https://subzerovikingrepair.pro/images/hero.webp",
         ),
       ],
       links: [{ rel: "canonical", href: absUrl("/") }],
@@ -150,7 +150,7 @@ export const Route = createFileRoute("/")({
             telephone: "+1-619-975-4755",
             email: "subzerovikingrepair.pro@gmail.com",
             url: absUrl("/"),
-            image: "https://subzerovikingrepairpro.com/images/hero.webp",
+            image: "https://subzerovikingrepair.pro/images/hero.webp",
             priceRange: "$$",
             address: LOCAL_BUSINESS_ADDRESS,
             openingHoursSpecification: LOCAL_BUSINESS_HOURS,
