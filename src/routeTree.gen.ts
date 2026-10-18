@@ -12,7 +12,6 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ServiceAreaRouteImport } from './routes/service-area'
-import { Route as ReviewsRouteImport } from './routes/reviews'
 import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as FaqRouteImport } from './routes/faq'
@@ -45,11 +44,6 @@ const ServicesRoute = ServicesRouteImport.update({
 const ServiceAreaRoute = ServiceAreaRouteImport.update({
   id: '/service-area',
   path: '/service-area',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ReviewsRoute = ReviewsRouteImport.update({
-  id: '/reviews',
-  path: '/reviews',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -153,7 +147,6 @@ export interface FileRoutesByFullPath {
   '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRoute
-  '/reviews': typeof ReviewsRoute
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -177,7 +170,6 @@ export interface FileRoutesByTo {
   '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRoute
-  '/reviews': typeof ReviewsRoute
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -202,7 +194,6 @@ export interface FileRoutesById {
   '/faq': typeof FaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRoute
-  '/reviews': typeof ReviewsRoute
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -228,7 +219,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/privacy-policy'
     | '/projects'
-    | '/reviews'
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
@@ -252,7 +242,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/privacy-policy'
     | '/projects'
-    | '/reviews'
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
@@ -276,7 +265,6 @@ export interface FileRouteTypes {
     | '/faq'
     | '/privacy-policy'
     | '/projects'
-    | '/reviews'
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
@@ -301,7 +289,6 @@ export interface RootRouteChildren {
   FaqRoute: typeof FaqRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProjectsRoute: typeof ProjectsRoute
-  ReviewsRoute: typeof ReviewsRoute
   ServiceAreaRoute: typeof ServiceAreaRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -338,13 +325,6 @@ declare module '@tanstack/react-router' {
       path: '/service-area'
       fullPath: '/service-area'
       preLoaderRoute: typeof ServiceAreaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/reviews': {
-      id: '/reviews'
-      path: '/reviews'
-      fullPath: '/reviews'
-      preLoaderRoute: typeof ReviewsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/projects': {
@@ -485,7 +465,6 @@ const rootRouteChildren: RootRouteChildren = {
   FaqRoute: FaqRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProjectsRoute: ProjectsRoute,
-  ReviewsRoute: ReviewsRoute,
   ServiceAreaRoute: ServiceAreaRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,

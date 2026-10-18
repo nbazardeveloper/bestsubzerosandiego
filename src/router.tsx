@@ -17,8 +17,8 @@ export const getRouter = () => {
   // This was previously set to 60s, which sounds like plenty but isn't in
   // practice: browsing Services or Projects for even a minute before
   // clicking back to Home is completely normal, and that alone was enough
-  // to cross the 60s line and re-trigger the glitch. SiteHeader/SiteFooter/
-  // ReviewsBar already used a 5-minute staleTime for the exact same
+  // to cross the 60s line and re-trigger the glitch. SiteHeader/SiteFooter
+  // already used a 5-minute staleTime for the exact same
   // site-settings query — this brings the route loaders (index/services/
   // projects/etc, which didn't specify their own staleTime and so fell back
   // to this global default) up to that same 5 minutes, since none of this

@@ -11,8 +11,6 @@ import {
 } from "@/components/ui/accordion";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { GuaranteeBadge } from "@/components/site/GuaranteeBadge";
-import { TestimonialCarousel } from "@/components/site/TestimonialCarousel";
-import { SITE_REVIEWS } from "@/lib/reviews-data";
 import { getSiteSettings } from "@/lib/site.functions";
 import { absUrl, twitterMeta } from "@/lib/seo";
 import {
@@ -131,15 +129,6 @@ const FAQS = [
   },
 ];
 
-// These are real reviews of the business, but none happen to mention washer/
-// dryer jobs specifically (Sub-Zero/Viking/Wolf kitchen appliances only) —
-// each one's `service` tag names the specific appliance, which would read as
-// a mismatched claim on a laundry-specific landing page. Dropping that tag
-// here keeps the quotes as honest general trust signal (responsiveness,
-// professionalism) without implying laundry-specific testimonials we don't
-// have yet.
-const LANDING_REVIEWS = SITE_REVIEWS.map(({ service: _service, ...rest }) => rest);
-
 const AREAS = [
   "San Diego",
   "La Jolla",
@@ -223,8 +212,8 @@ function WashingMachineDryerLanding() {
             </h1>
             <p className="mt-4 text-lg text-muted-foreground">
               Fast, honest repair for front-load and top-load washers and gas or electric dryers.
-              Upfront pricing, OEM parts, and a technician who explains the actual problem — not just
-              a bill.
+              Upfront pricing, OEM parts, and a technician who explains the actual problem — not
+              just a bill.
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
@@ -381,7 +370,10 @@ function WashingMachineDryerLanding() {
                     key={f}
                     className="flex items-start gap-2 rounded-lg border border-border bg-card p-3 text-sm"
                   >
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" aria-hidden />{" "}
+                    <CheckCircle2
+                      className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent"
+                      aria-hidden
+                    />{" "}
                     {f}
                   </div>
                 ))}
@@ -397,23 +389,16 @@ function WashingMachineDryerLanding() {
                     key={f}
                     className="flex items-start gap-2 rounded-lg border border-border bg-card p-3 text-sm"
                   >
-                    <CheckCircle2 className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent" aria-hidden />{" "}
+                    <CheckCircle2
+                      className="mt-0.5 h-4 w-4 flex-shrink-0 text-accent"
+                      aria-hidden
+                    />{" "}
                     {f}
                   </div>
                 ))}
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="bg-primary text-primary-foreground">
-        <div className="mx-auto max-w-3xl px-4 py-16 md:px-8">
-          <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">
-            What our <span className="text-accent">customers say</span>
-          </h2>
-          <TestimonialCarousel testimonials={LANDING_REVIEWS} className="mt-10" />
         </div>
       </section>
 

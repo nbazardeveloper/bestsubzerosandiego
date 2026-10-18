@@ -21,9 +21,9 @@ export const siteSettings: SiteSettings = {
   diagnostic_fee: "$95, waived when the repair is completed",
   social_links: {},
   review_count: null,
-  review_rating: 5.0,
+  review_rating: null,
   yelp_review_count: null,
-  yelp_review_rating: 4.9,
+  yelp_review_rating: null,
 };
 
 type Service = {

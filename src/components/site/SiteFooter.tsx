@@ -183,11 +183,6 @@ export function SiteFooter() {
               </Link>
             </li>
             <li>
-              <Link to="/reviews" className="transition-colors hover:text-primary-foreground">
-                Customer reviews
-              </Link>
-            </li>
-            <li>
               <Link to="/blog" className="transition-colors hover:text-primary-foreground">
                 Blog
               </Link>
@@ -257,7 +252,11 @@ export function SiteFooter() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <img src="/images/patch-logo.svg" alt="Best Sub-Zero & Viking Service on Patch" className="h-6 w-auto" />
+            <img
+              src="/images/patch-logo.svg"
+              alt="Best Sub-Zero & Viking Service on Patch"
+              className="h-6 w-auto"
+            />
           </a>
         </div>
       </div>

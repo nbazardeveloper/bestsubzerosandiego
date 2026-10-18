@@ -11,12 +11,9 @@ import { Phone, CheckCircle2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { GuaranteeBadge } from "@/components/site/GuaranteeBadge";
-import { ReviewsBar } from "@/components/site/ReviewsBar";
 import { SpecialistBrandsBand } from "@/components/site/SpecialistBrandsBand";
 import { BrandsMarquee } from "@/components/site/BrandsMarquee";
-import { TestimonialCarousel } from "@/components/site/TestimonialCarousel";
 import { FinalCta } from "@/components/site/FinalCta";
-import { SITE_REVIEWS } from "@/lib/reviews-data";
 import {
   YearsIcon,
   DiagnosticsIcon,
@@ -97,8 +94,8 @@ export const Route = createFileRoute("/")({
   head: ({ loaderData }) => {
     // Star-rating rich snippets in Google search results require an
     // aggregateRating on the LocalBusiness entity — we already collect
-    // review_count/review_rating in site settings (shown on-site via
-    // ReviewsBar) but weren't surfacing them to search engines at all.
+    // review_count/review_rating in site settings but weren't surfacing them
+    // to search engines at all.
     // Only include it once both values are actually set, so an empty/unset
     // admin field never emits a bogus "0 reviews" rating.
     const settings = loaderData?.settings;
@@ -417,32 +414,6 @@ function Home() {
           </div>
         </section>
       ) : null}
-
-      {/* TESTIMONIAL */}
-      <section className="relative isolate overflow-hidden border-y border-border text-primary-foreground">
-        <ImagePlaceholder
-          fill
-          src="/images/hero-review.webp"
-          label="Customer reviews"
-          alt=""
-          className="-z-10"
-        />
-        <div aria-hidden className="absolute inset-0 -z-10 bg-primary/85" />
-
-        <div className="mx-auto max-w-4xl px-4 py-20 text-center md:px-8">
-          <p className="text-xs uppercase tracking-[0.25em] text-primary-foreground/60">
-            Customer feedback
-          </p>
-          <TestimonialCarousel testimonials={SITE_REVIEWS} className="mt-6" />
-          <ReviewsBar variant="dark" className="mt-10 justify-center" />
-          <Link
-            to="/reviews"
-            className="mt-6 inline-flex text-sm text-accent-foreground underline underline-offset-4"
-          >
-            Read customer reviews →
-          </Link>
-        </div>
-      </section>
 
       {/* SERVICE AREA */}
       <section className="mx-auto max-w-7xl px-4 py-20 md:px-8">

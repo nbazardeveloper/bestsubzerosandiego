@@ -11,7 +11,6 @@ import { useQuery } from "@tanstack/react-query";
 import { Phone, Mail, MapPin, CalendarClock, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GuaranteeBadge } from "@/components/site/GuaranteeBadge";
-import { ReviewsBar } from "@/components/site/ReviewsBar";
 import { getSiteSettings } from "@/lib/site.functions";
 
 const AREAS = [
@@ -182,8 +181,6 @@ function Contact() {
             <p className="mt-2 text-sm text-muted-foreground">
               {s?.diagnostic_fee ?? "$95, waived when the repair is completed."}
             </p>
-            <h3 className="mt-6 text-sm font-semibold">Reviews</h3>
-            <ReviewsBar className="mt-2" />
           </div>
 
           <div>

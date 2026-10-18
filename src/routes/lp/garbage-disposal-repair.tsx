@@ -11,8 +11,6 @@ import {
 } from "@/components/ui/accordion";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { GuaranteeBadge } from "@/components/site/GuaranteeBadge";
-import { TestimonialCarousel } from "@/components/site/TestimonialCarousel";
-import { SITE_REVIEWS } from "@/lib/reviews-data";
 import { getSiteSettings } from "@/lib/site.functions";
 import { absUrl, twitterMeta } from "@/lib/seo";
 import {
@@ -132,12 +130,6 @@ const FAQS = [
     a: "Yes. Most dishwashers drain through the disposal, so a clog there can leave water in the dishwasher. We repair dishwashers too and can check both in the same visit.",
   },
 ];
-
-// Real reviews of the business, but none mention garbage disposal jobs specifically —
-// each one's `service` tag names a different appliance, which would read as a
-// mismatched claim here, so the tags are dropped and the quotes kept as
-// general trust signal.
-const LANDING_REVIEWS = SITE_REVIEWS.map(({ service: _service, ...rest }) => rest);
 
 const AREAS = [
   "San Diego",
@@ -411,16 +403,6 @@ function GarbageDisposalRepairLanding() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="bg-primary text-primary-foreground">
-        <div className="mx-auto max-w-3xl px-4 py-16 md:px-8">
-          <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">
-            What our <span className="text-accent">customers say</span>
-          </h2>
-          <TestimonialCarousel testimonials={LANDING_REVIEWS} className="mt-10" />
         </div>
       </section>
 

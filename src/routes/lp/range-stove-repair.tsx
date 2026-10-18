@@ -11,8 +11,6 @@ import {
 } from "@/components/ui/accordion";
 import { ImagePlaceholder } from "@/components/site/ImagePlaceholder";
 import { GuaranteeBadge } from "@/components/site/GuaranteeBadge";
-import { TestimonialCarousel } from "@/components/site/TestimonialCarousel";
-import { SITE_REVIEWS } from "@/lib/reviews-data";
 import { getSiteSettings } from "@/lib/site.functions";
 import { absUrl, twitterMeta } from "@/lib/seo";
 import {
@@ -137,13 +135,6 @@ const FAQS = [
     a: "If the smell is strong, leave the house and call SDG&E or 911 first. For a faint smell around the burners, turn the range off, don't use it, and call us to inspect the valves and connections.",
   },
 ];
-
-// Real reviews of the business. Only cooking-related `service` tags are kept
-// (stove/range/oven) — any other tag would read as off-topic on a stove
-// landing page, so it's dropped rather than the review itself.
-const LANDING_REVIEWS = SITE_REVIEWS.map(({ service, ...rest }) =>
-  /stove|range|oven/i.test(service ?? "") ? { ...rest, service } : rest,
-);
 
 const AREAS = [
   "San Diego",
@@ -419,16 +410,6 @@ function RangeStoveRepairLanding() {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="bg-primary text-primary-foreground">
-        <div className="mx-auto max-w-3xl px-4 py-16 md:px-8">
-          <h2 className="text-center text-2xl font-semibold tracking-tight md:text-3xl">
-            What our <span className="text-accent">customers say</span>
-          </h2>
-          <TestimonialCarousel testimonials={LANDING_REVIEWS} className="mt-10" />
         </div>
       </section>
 
