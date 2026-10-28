@@ -21,9 +21,14 @@ export const Route = createFileRoute("/thank-you")({
 
 function ThankYou() {
   useEffect(() => {
-    const w = window as unknown as { dataLayer?: unknown[] };
+    const w = window as unknown as {
+      dataLayer?: unknown[];
+      gtag?: (...args: unknown[]) => void;
+    };
     w.dataLayer = w.dataLayer || [];
     w.dataLayer.push({ event: "booking_submitted" });
+    // Google Ads "SD Booking Thank-you" conversion (page load).
+    w.gtag?.("event", "conversion", { send_to: "AW-990368648/R2V4CPnWoawdEIinn9gD" });
   }, []);
 
   return (
