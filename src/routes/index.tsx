@@ -24,6 +24,7 @@ import {
 } from "@/components/site/icons/WhyChooseIcons";
 import { getServiceIcon, getServiceCategoryIconClassName } from "@/lib/service-category-icons";
 import { listFeaturedServices, listFeaturedProjects, getSiteSettings } from "@/lib/site.functions";
+import { BOOKING_URL } from "@/lib/booking";
 
 const ADVANTAGES = [
   {
@@ -225,11 +226,11 @@ function Home() {
                   <Phone className="h-4 w-4" /> Call {phone}
                 </Button>
               </a>
-              <Link to="/contact">
+              <a href={BOOKING_URL}>
                 <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
                   Request service
                 </Button>
-              </Link>
+              </a>
             </div>
             <p className="mt-4 text-sm text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.7)]">
               $95 diagnostic fee —{" "}
@@ -350,12 +351,12 @@ function Home() {
                       {s.short_description}
                     </p>
                   </div>
-                  <Link
-                    to="/contact"
+                  <a
+                    href={BOOKING_URL}
                     className="absolute -bottom-5 left-6 inline-flex items-center justify-center rounded-md bg-accent px-5 py-2.5 font-display text-sm font-bold text-accent-foreground shadow-sm transition-colors hover:bg-accent/90"
                   >
                     Request Service
-                  </Link>
+                  </a>
                 </div>
               );
             })}

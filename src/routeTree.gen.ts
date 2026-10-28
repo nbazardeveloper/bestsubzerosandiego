@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ThankYouRouteImport } from './routes/thank-you'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as ServiceAreaRouteImport } from './routes/service-area'
@@ -31,6 +32,11 @@ import { Route as LpIceMakerRepairRouteImport } from './routes/lp/ice-maker-repa
 import { Route as LpGarbageDisposalRepairRouteImport } from './routes/lp/garbage-disposal-repair'
 import { Route as LpDishwasherRepairRouteImport } from './routes/lp/dishwasher-repair'
 
+const ThankYouRoute = ThankYouRouteImport.update({
+  id: '/thank-you',
+  path: '/thank-you',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -150,6 +156,7 @@ export interface FileRoutesByFullPath {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/thank-you': typeof ThankYouRoute
   '/lp/dishwasher-repair': typeof LpDishwasherRepairRoute
   '/lp/garbage-disposal-repair': typeof LpGarbageDisposalRepairRoute
   '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
@@ -173,6 +180,7 @@ export interface FileRoutesByTo {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/thank-you': typeof ThankYouRoute
   '/lp/dishwasher-repair': typeof LpDishwasherRepairRoute
   '/lp/garbage-disposal-repair': typeof LpGarbageDisposalRepairRoute
   '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
@@ -197,6 +205,7 @@ export interface FileRoutesById {
   '/service-area': typeof ServiceAreaRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/thank-you': typeof ThankYouRoute
   '/lp/dishwasher-repair': typeof LpDishwasherRepairRoute
   '/lp/garbage-disposal-repair': typeof LpGarbageDisposalRepairRoute
   '/lp/ice-maker-repair': typeof LpIceMakerRepairRoute
@@ -222,6 +231,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/thank-you'
     | '/lp/dishwasher-repair'
     | '/lp/garbage-disposal-repair'
     | '/lp/ice-maker-repair'
@@ -245,6 +255,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/thank-you'
     | '/lp/dishwasher-repair'
     | '/lp/garbage-disposal-repair'
     | '/lp/ice-maker-repair'
@@ -268,6 +279,7 @@ export interface FileRouteTypes {
     | '/service-area'
     | '/services'
     | '/sitemap.xml'
+    | '/thank-you'
     | '/lp/dishwasher-repair'
     | '/lp/garbage-disposal-repair'
     | '/lp/ice-maker-repair'
@@ -292,6 +304,7 @@ export interface RootRouteChildren {
   ServiceAreaRoute: typeof ServiceAreaRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ThankYouRoute: typeof ThankYouRoute
   LpDishwasherRepairRoute: typeof LpDishwasherRepairRoute
   LpGarbageDisposalRepairRoute: typeof LpGarbageDisposalRepairRoute
   LpIceMakerRepairRoute: typeof LpIceMakerRepairRoute
@@ -306,6 +319,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/thank-you': {
+      id: '/thank-you'
+      path: '/thank-you'
+      fullPath: '/thank-you'
+      preLoaderRoute: typeof ThankYouRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -468,6 +488,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServiceAreaRoute: ServiceAreaRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ThankYouRoute: ThankYouRoute,
   LpDishwasherRepairRoute: LpDishwasherRepairRoute,
   LpGarbageDisposalRepairRoute: LpGarbageDisposalRepairRoute,
   LpIceMakerRepairRoute: LpIceMakerRepairRoute,

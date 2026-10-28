@@ -9,6 +9,7 @@ import { SpecialistBrandsBand } from "@/components/site/SpecialistBrandsBand";
 import { listServices } from "@/lib/site.functions";
 import { getServiceIcon, getServiceCategoryIconClassName } from "@/lib/service-category-icons";
 import { FinalCta } from "@/components/site/FinalCta";
+import { BOOKING_URL } from "@/lib/booking";
 
 // Services that have a dedicated page — clicking anywhere on their card opens
 // it (other cards only have the "Request Service" button).
@@ -193,12 +194,12 @@ function ServicesPage() {
                   <h2 className="mt-3 text-lg font-semibold">{s.title}</h2>
                   <p className="mt-2 flex-1 text-sm text-muted-foreground">{s.short_description}</p>
                 </div>
-                <Link
-                  to="/contact"
+                <a
+                  href={BOOKING_URL}
                   className="absolute -bottom-5 left-6 z-20 inline-flex items-center justify-center rounded-md bg-accent px-5 py-2.5 font-display text-sm font-bold text-accent-foreground shadow-sm transition-colors hover:bg-accent/90"
                 >
                   Request Service
-                </Link>
+                </a>
               </div>
             );
           })}

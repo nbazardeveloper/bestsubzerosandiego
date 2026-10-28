@@ -19,6 +19,7 @@ import {
   SameDayIcon,
   WarrantyIcon,
 } from "@/components/site/icons/WhyChooseIcons";
+import { BOOKING_URL } from "@/lib/booking";
 
 const BRANDS = [
   "Sub-Zero",
@@ -274,11 +275,11 @@ function RefrigeratorRepairLanding() {
                   <Phone className="h-4 w-4" /> Call {phone}
                 </Button>
               </a>
-              <Link to="/contact">
+              <a href={BOOKING_URL}>
                 <Button size="lg" variant="outline">
                   Get a Free Quote
                 </Button>
-              </Link>
+              </a>
             </div>
             <p className="mt-3 text-xs text-muted-foreground">
               No obligation — same-day response, most repairs finished in one visit.
@@ -469,11 +470,11 @@ function RefrigeratorRepairLanding() {
                 <Phone className="h-4 w-4" /> Call {phone}
               </Button>
             </a>
-            <Link to="/contact">
+            <a href={BOOKING_URL}>
               <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
                 Get a Free Quote
               </Button>
-            </Link>
+            </a>
           </div>
         </div>
       </section>
@@ -494,11 +495,11 @@ function RefrigeratorRepairLanding() {
             <Phone className="h-4 w-4" /> Call Now
           </Button>
         </a>
-        <Link to="/contact" className="flex-1">
+        <a href={BOOKING_URL} className="flex-1">
           <Button size="lg" variant="outline" className="w-full">
             Free Quote
           </Button>
-        </Link>
+        </a>
       </div>
     </div>
   );

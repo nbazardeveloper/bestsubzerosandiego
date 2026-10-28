@@ -22,6 +22,7 @@ import {
   LOCAL_BUSINESS_ADDRESS,
   LOCAL_BUSINESS_HOURS,
 } from "@/lib/seo";
+import { BOOKING_URL } from "@/lib/booking";
 
 // Toasts (sonner) are only ever triggered by form submissions (lead form,
 // admin, auth) — never needed for the initial render of any page. Loading
@@ -351,14 +352,14 @@ function RootComponent() {
           showMobileCta ? "translate-y-0" : "translate-y-full"
         }`}
       >
-        <Link to="/contact">
+        <a href={BOOKING_URL}>
           <Button
             size="lg"
             className="w-full gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
           >
             <CalendarClock className="h-4 w-4" /> Request Service
           </Button>
-        </Link>
+        </a>
       </div>
       <Suspense fallback={null}>
         <Toaster position="top-right" richColors closeButton />

@@ -4,6 +4,7 @@ import { Phone, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { getSiteSettings } from "@/lib/site.functions";
+import { BOOKING_URL } from "@/lib/booking";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -126,11 +127,11 @@ export function SiteHeader() {
           >
             <Phone className="h-4 w-4" aria-hidden /> {phone}
           </a>
-          <Link to="/contact">
+          <a href={BOOKING_URL}>
             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
               Request Service Online
             </Button>
-          </Link>
+          </a>
         </div>
       </div>
 
@@ -156,9 +157,9 @@ export function SiteHeader() {
                   <Phone className="h-4 w-4" /> Call {phone}
                 </Button>
               </a>
-              <Link to="/contact" onClick={() => setOpen(false)}>
+              <a href={BOOKING_URL} onClick={() => setOpen(false)}>
                 <Button className="w-full">Request Service</Button>
-              </Link>
+              </a>
             </div>
           </nav>
         </div>

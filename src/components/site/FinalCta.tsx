@@ -5,6 +5,7 @@ import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getSiteSettings } from "@/lib/site.functions";
 import { cn } from "@/lib/utils";
+import { BOOKING_URL } from "@/lib/booking";
 
 interface FinalCtaProps {
   heading?: ReactNode;
@@ -46,11 +47,11 @@ export function FinalCta({
               <Phone className="h-4 w-4" /> Call {phone}
             </Button>
           </a>
-          <Link to="/contact">
+          <a href={BOOKING_URL}>
             <Button size="lg" className="bg-accent text-accent-foreground hover:bg-accent/90">
               Book online
             </Button>
-          </Link>
+          </a>
         </div>
       </div>
     </section>
